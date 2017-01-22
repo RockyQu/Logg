@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_github"
+        android:orderInCategory="100"
+        android:title="GitHub"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_qlog"
+        android:orderInCategory="100"
+        android:title="QLog"
+        app:showAsAction="never" />
+</menu>
