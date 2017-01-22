@@ -46,10 +46,8 @@ public class Util {
      *
      * @param context
      * @param permission
-     * @return
      */
     public static void isPermission(Context context, String permission) {
-//        String permission = "android.permission.SYSTEM_ALERT_WINDOW";
         int status = context.checkCallingOrSelfPermission(permission);
         if (status == PackageManager.PERMISSION_DENIED) {
             throw new IllegalStateException("in order to use this, " +
