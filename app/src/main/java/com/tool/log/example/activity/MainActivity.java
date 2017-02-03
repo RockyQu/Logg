@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
     //异常测试
     private Button btnCrash = null;
 
-    //悬浮窗测试
-    private Button btnDisplay = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Log测试
         this.logTest();
+
         //Crash测试
         this.crashTest();
-        //悬浮窗测试
-        this.displayTest();
     }
 
     /**
@@ -117,52 +113,6 @@ public class MainActivity extends AppCompatActivity {
         btnCrash.setOnClickListener(onClickListener);
     }
 
-    // 测试
-    int i = 0;
-
-    /**
-     * 消息处理器
-     */
-    private Handler handler = new Handler();
-
-    /**
-     * 线程定时器
-     */
-    private Runnable runnable = new Runnable() {
-
-        @Override
-        public void run() {
-            QLog.e("Test " + i++);
-
-            handler.postDelayed(this, 500);
-        }
-    };
-
-    /**
-     * 悬浮窗测试
-     */
-    private void displayTest() {
-        btnDisplay = (Button) findViewById(R.id.btn_display);
-
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.btn_display:
-                        QLog.display(MainActivity.this, true);
-
-                        // 测试代码 模拟Log在logcat输出
-                        handler.postDelayed(runnable, 0);
-                    default:
-                        break;
-                }
-            }
-        };
-
-        btnDisplay.setOnClickListener(onClickListener);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about, menu);
@@ -181,13 +131,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //关闭悬浮窗口
-        QLog.display(MainActivity.this, false);
     }
 
     @Override

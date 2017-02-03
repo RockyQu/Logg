@@ -1,8 +1,5 @@
 package com.tool.common.log;
 
-import android.content.Context;
-
-import com.tool.common.log.display.DisplayManager;
 import com.tool.common.log.log.PrinterManager;
 
 /**
@@ -89,19 +86,5 @@ public class QLog {
      */
     public static void xml(Object object) {
         printer.xml(object);
-    }
-
-    /**
-     * 控制窗口Log的显示/关闭
-     *
-     * @param context
-     * @param isDisplay
-     */
-    public static void display(Context context, boolean isDisplay) {
-        if (isDisplay) {
-            DisplayManager.getInstance().start(context);
-        } else {
-            DisplayManager.getInstance().stop(context);
-        }
     }
 }
