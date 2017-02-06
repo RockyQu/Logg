@@ -1,5 +1,5 @@
 # Q-Log
-Android日志综合管理工具
+Android Log日志组件
 
 ##Features
 •  支持打印基本数据类型、数组、Map、List、Intent、Bundle等  
@@ -33,14 +33,15 @@ QLog.d(DataHelper.getBigString(MainActivity.this));
 ```
 
 ##History
-v1.0.0  
+v0.1.0  
 •  支持打印基本数据类型、数组、Map、List、Intent、Bundle等  
 •  支持Json、XML格式化打印  
-•  全局异常捕获，自动格式化保存至文件  
-•  悬浮窗打印日志，方便施工现场调试分析  
+•  全局异常捕获，自动格式化保存至文件 
 
 ##Feedback
-•  Project  [Submit Bug or Idea](https://github.com/DesignQu/Android-Q-Log/issues)   
+•  Project  [Submit Bug or Idea](https://github.com/DesignQu/Tool-Log/issues)   
 
 ##Thanks
 [LogUtils](https://github.com/pengwei1024/LogUtils)
+[DarksLogs](https://github.com/liulhdarks/darks-logs)
+
