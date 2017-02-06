@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrashHandler {
+public class ThreadCatchInterceptor {
 
     // 系统默认的Thread.UncaughtException处理类
     private Thread.UncaughtExceptionHandler defaultExceptionHandler;
@@ -29,11 +29,11 @@ public class CrashHandler {
     private LogConfig logConfig = null;
 
     // 默认Crash保存目录
-    public static final String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/QLog/" + "CrashLog/";
+    private String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/QLog/" + "CrashLog/";
 
     private final Logger logger;
 
-    public CrashHandler() {
+    public ThreadCatchInterceptor() {
         this.logger = Logger.DEFAULT;
 
         logConfig = LogConfig.getConfig();
@@ -47,7 +47,7 @@ public class CrashHandler {
         /**
          * 静态初始化器，由JVM来保证线程安全
          */
-        private static CrashHandler crash = new CrashHandler();
+        private static ThreadCatchInterceptor crash = new ThreadCatchInterceptor();
     }
 
     /**
@@ -55,7 +55,7 @@ public class CrashHandler {
      *
      * @return Setting
      */
-    public static CrashHandler getInstance() {
+    public static ThreadCatchInterceptor getInstance() {
         return CrashHolder.crash;
     }
 
@@ -195,7 +195,7 @@ public class CrashHandler {
         void finish(String path);
     }
 
-    public interface Logger {
+    private interface Logger {
         void log(String message);
 
         Logger DEFAULT = new Logger() {

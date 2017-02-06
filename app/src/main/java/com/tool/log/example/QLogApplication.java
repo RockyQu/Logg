@@ -3,6 +3,7 @@ package com.tool.log.example;
 import android.app.Application;
 
 import com.tool.common.log.QLog;
+import com.tool.common.log.crash.ThreadCatchInterceptor;
 import com.tool.common.log.log.LogConfig;
 
 /**
@@ -23,20 +24,17 @@ public class QLogApplication extends Application {
                 .setOpen(true)
                 .build();
 
-//        // Crash监听
-//        Setting.getInstance().setCrashListener(new CrashListener() {
-//
-//            @Override
-//            public void error(Throwable throwable) {
-//                QLog.i(throwable);
-//            }
-//
-//            @Override
-//            public void finish(String path) {
-//                QLog.i(path);
-//
-//                //TODO Upload Server
-//            }
-//        });
+        ThreadCatchInterceptor.getInstance().install(new ThreadCatchInterceptor.CallBack() {
+
+            @Override
+            public void error(Throwable throwable) {
+                QLog.i(throwable);
+            }
+
+            @Override
+            public void finish(String path) {
+                QLog.i(path);
+            }
+        });
     }
 }
