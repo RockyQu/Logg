@@ -26,27 +26,9 @@
         style="@style/btn_style"
         android:text="Big Log" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#DBDBDB" />
-
     <Button
         android:id="@+id/btn_crash"
         style="@style/btn_style"
         android:text="Crash Test" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:background="#DBDBDB" />
-
-    <Button
-        android:id="@+id/btn_display"
-        style="@style/btn_style"
-        android:text="Display Test" />
 </LinearLayout>
