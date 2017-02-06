@@ -1,7 +1,7 @@
 package com.tool.common.log.util;
 
-import com.tool.common.log.common.Constant;
-import com.tool.common.log.common.Setting;
+import com.tool.common.log.log.LogConstant;
+import com.tool.common.log.log.LogConfig;
 import com.tool.common.log.log.parser.Parser;
 
 import java.lang.reflect.Field;
@@ -51,15 +51,15 @@ public class ObjectUtil {
      */
     private static String objectToString(Object object, int childLevel) {
         if (object == null) {
-            return Constant.NULL;
+            return LogConstant.NULL;
         }
 
-        if (childLevel > Constant.MAX_LEVEL) {
+        if (childLevel > LogConstant.MAX_LEVEL) {
             return object.toString();
         }
 
         //自定义解析类判断
-        for (Parser parser : Setting.getInstance().getParsers()) {
+        for (Parser parser : LogConfig.getConfig().getParsers()) {
             if (parser.parseClassType().isAssignableFrom(object.getClass())) {
                 return parser.parseString(object);
             }
@@ -100,7 +100,7 @@ public class ObjectUtil {
         }
 
         if (isSubClass) {
-            builder.append(Constant.BR + "=> ");
+            builder.append(LogConstant.BR + "=> ");
         }
 
         String breakLine = "";
@@ -128,7 +128,7 @@ public class ObjectUtil {
                     } else if (subObject instanceof Character) {
                         subObject = "\'" + subObject + "\'";
                     }
-                    if (childOffset < Constant.MAX_LEVEL) {
+                    if (childOffset < LogConstant.MAX_LEVEL) {
                         subObject = objectToString(subObject, childOffset + 1);
                     }
                 }

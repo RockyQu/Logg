@@ -3,43 +3,42 @@ package com.tool.common.log.log;
 import android.text.TextUtils;
 
 import com.tool.common.log.QLog;
-import com.tool.common.log.common.Constant;
-import com.tool.common.log.common.Setting;
 import com.tool.common.log.log.printer.DefaultPrinter;
 import com.tool.common.log.log.printer.JsonPrinter;
 import com.tool.common.log.log.printer.Type;
 import com.tool.common.log.log.printer.XmlPrinter;
 import com.tool.common.log.util.ObjectUtil;
-import com.tool.common.log.util.Util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import static com.tool.common.log.log.printer.Type.J;
 import static com.tool.common.log.log.printer.Type.X;
 
 /**
- * 日志打印管理器
+ * 日志管理器
  */
 public class PrinterManager {
 
-    //Default Printer
+    // Default Printer
     private DefaultPrinter defaultPrinter = null;
-    //Json Printer
+    // Json Printer
     private JsonPrinter jsonPrinter = null;
-    //XML Printer
+    // XML Printer
     private XmlPrinter xmlPrinter = null;
 
     /**
      * 参数配置
      */
-    private Setting setting = null;
+    private LogConfig setting = null;
 
     public PrinterManager() {
         defaultPrinter = new DefaultPrinter();
         jsonPrinter = new JsonPrinter();
         xmlPrinter = new XmlPrinter();
 
-        setting = Setting.getInstance().addParserClass(Constant.DEFAULT_PARSER_CLASS);
+        setting = LogConfig.getConfig();
     }
 
     /**
@@ -122,7 +121,7 @@ public class PrinterManager {
      */
     private synchronized void printer(Type type, Object object) {
 
-        if (!setting.isDebug()) {//是否允许日志输出
+        if (!setting.isOpen()) {//是否允许日志输出
             return;
         }
 
@@ -134,8 +133,8 @@ public class PrinterManager {
             case E:
             case WTF:
                 String o = ObjectUtil.objectToString(object);
-                if (o.length() > Constant.LINE_MAX) {
-                    for (String subMsg : Util.bigStringToList(o)) {
+                if (o.length() > LogConstant.LINE_MAX) {
+                    for (String subMsg : bigStringToList(o)) {
                         defaultPrinter.printer(type, getTag(), subMsg);
                     }
                     return;
@@ -198,5 +197,29 @@ public class PrinterManager {
         }
 
         return stackOffset != -1 ? trace[stackOffset] : null;
+    }
+
+    /**
+     * 超大文本字符串转化为List
+     *
+     * @param message
+     * @return
+     */
+    private List<String> bigStringToList(String message) {
+        List<String> stringList = new ArrayList<>();
+        int index = 0;
+        int maxLength = LogConstant.LINE_MAX;
+        int countOfSub = message.length() / maxLength;
+        if (countOfSub > 0) {
+            for (int i = 0; i < countOfSub; i++) {
+                String sub = message.substring(index, index + maxLength);
+                stringList.add(sub);
+                index += maxLength;
+            }
+            stringList.add(message.substring(index, message.length()));
+        } else {
+            stringList.add(message);
+        }
+        return stringList;
     }
 }

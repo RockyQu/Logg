@@ -1,9 +1,10 @@
 package com.tool.common.log.crash;
 
 import android.os.Build;
+import android.os.Environment;
 
 import com.tool.common.log.QLog;
-import com.tool.common.log.common.Setting;
+import com.tool.common.log.log.LogConfig;
 import com.tool.common.log.util.AppUtils;
 import com.tool.common.log.util.FileUtil;
 import com.tool.common.log.util.TimeUtils;
@@ -18,29 +19,24 @@ import java.util.List;
 
 public class CrashHandler {
 
-    /**
-     * 系统默认的Thread.UncaughtException处理类
-     */
+    // 系统默认的Thread.UncaughtException处理类
     private Thread.UncaughtExceptionHandler defaultExceptionHandler;
 
-    /**
-     * 保存Crash堆栈相关信息
-     */
+    // Crash堆栈相关信息
     private List<String> crashInfo = new ArrayList<>();
 
-    /**
-     * Log参数配置
-     */
-    private Setting setting = null;
+    // Log参数配置
+    private LogConfig logConfig = null;
 
-    //是否存在SDCard
-    private boolean isSDCard = false;
+    // 默认Crash保存目录
+    public static final String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/QLog/" + "CrashLog/";
 
-    //CrashListener
-    private CrashListener crashListener = null;
+    private final Logger logger;
 
     public CrashHandler() {
-        setting = Setting.getInstance();
+        this.logger = Logger.DEFAULT;
+
+        logConfig = LogConfig.getConfig();
     }
 
     /**
@@ -66,46 +62,41 @@ public class CrashHandler {
     /**
      * 安装初始化
      */
-    public void install() {
-        isSDCard = FileUtil.existSDCard();
-        if (!isSDCard) {
-            QLog.w("Not installed SDCard, which causes the crash information could not be saved.");
+    public void install(final CallBack callBack) {
+        if (!FileUtil.existSDCard()) {
+            logger.log("Not installed SDCard, which causes the crash information could not be saved.");
         } else {
-            if (!FileUtil.createDirectory(setting.getPath())) {
-                QLog.w("Create QLog directory fails, which causes the crash information could not be saved.");
+            if (!FileUtil.createDirectory(PATH)) {
+                logger.log("Create QLog directory fails, which causes the crash information could not be saved.");
             }
         }
 
-        if (setting.isCrash()) {
-            defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        defaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
-            if (defaultExceptionHandler != null) {
-                Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+        if (defaultExceptionHandler != null) {
+            Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 
-                    @Override
-                    public void uncaughtException(Thread thread, Throwable throwable) {
+                @Override
+                public void uncaughtException(Thread thread, Throwable throwable) {
 
-                        if (getCrashListener() != null) {
-                            getCrashListener().error(throwable);
-                        }
-
-                        if (handleException(throwable)) {
-                            // 保存错误报告至文件
-                            save(throwable);
-                        } else {
-                            QLog.w("Collected error information failed.");
-                        }
-
-                        if (defaultExceptionHandler != null) {
-                            defaultExceptionHandler.uncaughtException(thread, throwable);
-                        }
+                    if (callBack != null) {
+                        callBack.error(throwable);
                     }
-                });
-            } else {
-                QLog.w("Get DefaultUncaughtExceptionHandler Failure.");
-            }
+
+                    if (handleException(throwable)) {
+                        // 保存错误报告至文件
+                        callBack.finish(save(throwable));
+                    } else {
+                        logger.log("Collected error information failed.");
+                    }
+
+                    if (defaultExceptionHandler != null) {
+                        defaultExceptionHandler.uncaughtException(thread, throwable);
+                    }
+                }
+            });
         } else {
-            QLog.w("Not turned Crash, example:Setting.getInstance().setCrash(true);");
+            logger.log("Get DefaultUncaughtExceptionHandler Failure.");
         }
     }
 
@@ -120,8 +111,8 @@ public class CrashHandler {
             return false;
         }
 
-        if (setting.getContext() != null) {
-            crashInfo.add("Version:" + AppUtils.getVersionName(setting.getContext()));
+        if (logConfig.getContext() != null) {
+            crashInfo.add("Version:" + AppUtils.getVersionName(logConfig.getContext()));
         }
 
         Field[] fields = Build.class.getDeclaredFields();
@@ -143,7 +134,7 @@ public class CrashHandler {
      * @param throwable
      * @return
      */
-    private void save(Throwable throwable) {
+    private String save(Throwable throwable) {
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
 
@@ -162,9 +153,9 @@ public class CrashHandler {
         printWriter.close();
         crashInfo.add(result);
 
+        // 文件路径
+        String savePath = PATH + TimeUtils.formatTime() + "_" + TimeUtils.currentTimeMillis() + ".log";
         try {
-            // 文件路径
-            String savePath = Setting.getInstance().getPath() + TimeUtils.formatTime() + "_" + TimeUtils.currentTimeMillis() + ".log";
             // 保存至文件
             FileOutputStream trace = new FileOutputStream(savePath, true);
             for (String string : crashInfo) {
@@ -173,20 +164,11 @@ public class CrashHandler {
             trace.flush();
             trace.close();
 
-            if (getCrashListener() != null) {
-                getCrashListener().finish(savePath);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public CrashListener getCrashListener() {
-        return crashListener;
-    }
-
-    public void setCrashListener(CrashListener crashListener) {
-        this.crashListener = crashListener;
+        return savePath;
     }
 
     /**
@@ -194,5 +176,34 @@ public class CrashHandler {
      */
     public void uninstall() {
         Thread.setDefaultUncaughtExceptionHandler(null);
+    }
+
+    public interface CallBack {
+
+        /**
+         * 触发异常
+         *
+         * @param throwable
+         */
+        void error(Throwable throwable);
+
+        /**
+         * 保存完毕
+         *
+         * @param path 保存路径
+         */
+        void finish(String path);
+    }
+
+    public interface Logger {
+        void log(String message);
+
+        Logger DEFAULT = new Logger() {
+
+            @Override
+            public void log(String message) {
+                QLog.w(message);
+            }
+        };
     }
 }
