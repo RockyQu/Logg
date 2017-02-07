@@ -19,16 +19,16 @@ import java.util.List;
 
 public class ThreadCatchInterceptor {
 
-    // 系统默认的Thread.UncaughtException处理类
+    // Thread.UncaughtException
     private Thread.UncaughtExceptionHandler defaultExceptionHandler;
 
-    // Crash堆栈相关信息
+    // Crash Stack-related information
     private List<String> crashInfo = new ArrayList<>();
 
-    // Log参数配置
+    // Log Config
     private LogConfig logConfig = null;
 
-    // 默认Crash保存目录
+    // Crash Save Directory
     private String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/QLog/" + "CrashLog/";
 
     private final Logger logger;
@@ -39,19 +39,12 @@ public class ThreadCatchInterceptor {
         logConfig = LogConfig.getConfig();
     }
 
-    /**
-     * 类级的内部类，也就是静态类的成员式内部类，该内部类的实例与外部类的实例没有绑定关系，而且只有被调用到时才会装载，从而实现了延迟加载。
-     */
     private static class CrashHolder {
-
-        /**
-         * 静态初始化器，由JVM来保证线程安全
-         */
         private static ThreadCatchInterceptor crash = new ThreadCatchInterceptor();
     }
 
     /**
-     * 获取单例
+     * Get Singleton
      *
      * @return Setting
      */
@@ -60,7 +53,7 @@ public class ThreadCatchInterceptor {
     }
 
     /**
-     * 安装初始化
+     * Install
      */
     public void install(final CallBack callBack) {
         if (!FileUtil.existSDCard()) {
@@ -84,7 +77,7 @@ public class ThreadCatchInterceptor {
                     }
 
                     if (handleException(throwable)) {
-                        // 保存错误报告至文件
+                        // Save the error report to a file
                         callBack.finish(save(throwable));
                     } else {
                         logger.log("Collected error information failed.");
@@ -101,7 +94,7 @@ public class ThreadCatchInterceptor {
     }
 
     /**
-     * 收集整理错误信息
+     * Gathering error messages
      *
      * @param throwable
      * @return
@@ -129,7 +122,7 @@ public class ThreadCatchInterceptor {
     }
 
     /**
-     * 保存错误信息到文件中
+     * Save the error message to a file
      *
      * @param throwable
      * @return
@@ -138,25 +131,20 @@ public class ThreadCatchInterceptor {
         Writer writer = new StringWriter();
         PrintWriter printWriter = new PrintWriter(writer);
 
-        // 将此 throwable 及其追踪输出到指定的PrintWriter
         throwable.printStackTrace(printWriter);
 
-        // getCause() 返回此 throwable 的 cause；如果 cause 不存在或未知，则返回 null。
         Throwable cause = throwable.getCause();
         while (cause != null) {
             cause.printStackTrace(printWriter);
             cause = cause.getCause();
         }
 
-        // toString() 以字符串的形式返回该缓冲区的当前值。
         String result = writer.toString();
         printWriter.close();
         crashInfo.add(result);
 
-        // 文件路径
         String savePath = PATH + TimeUtils.formatTime() + "_" + TimeUtils.currentTimeMillis() + ".log";
         try {
-            // 保存至文件
             FileOutputStream trace = new FileOutputStream(savePath, true);
             for (String string : crashInfo) {
                 trace.write((string + "\n").getBytes());
@@ -171,9 +159,6 @@ public class ThreadCatchInterceptor {
         return savePath;
     }
 
-    /**
-     * 卸载释放
-     */
     public void uninstall() {
         Thread.setDefaultUncaughtExceptionHandler(null);
     }
@@ -181,16 +166,16 @@ public class ThreadCatchInterceptor {
     public interface CallBack {
 
         /**
-         * 触发异常
+         * Fires an exception
          *
          * @param throwable
          */
         void error(Throwable throwable);
 
         /**
-         * 保存完毕
+         * Save finished
          *
-         * @param path 保存路径
+         * @param path
          */
         void finish(String path);
     }

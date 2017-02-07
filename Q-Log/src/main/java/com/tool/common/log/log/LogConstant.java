@@ -1,7 +1,5 @@
 package com.tool.common.log.log;
 
-import android.os.Environment;
-
 import com.tool.common.log.log.parser.BundleParse;
 import com.tool.common.log.log.parser.CollectionParse;
 import com.tool.common.log.log.parser.IntentParse;

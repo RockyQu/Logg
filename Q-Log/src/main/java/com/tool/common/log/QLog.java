@@ -1,6 +1,5 @@
 package com.tool.common.log;
 
-import com.tool.common.log.log.LogConfig;
 import com.tool.common.log.log.PrinterManager;
 
 /**

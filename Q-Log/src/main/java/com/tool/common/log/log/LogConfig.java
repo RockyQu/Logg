@@ -14,18 +14,11 @@ public class LogConfig {
 
     private volatile static LogConfig logConfig;
 
-    // Context
     private Context context;
 
-    // 是否开启日志输出
     private boolean open = true;
-    // 设置Log默认Tag
     private String tag = null;
 
-    /*
-     * 自定义解析器
-     * 当输入类型无法满足需求时或无法解析时，可实现Parser接口重写方法来添加自定义解析器
-     */
     private List<Parser> parsers = new ArrayList<>();
 
     public LogConfig(Buidler buidler) {
@@ -53,21 +46,21 @@ public class LogConfig {
     }
 
     /**
-     * 基本配置
+     * basic configuration
      */
     public static class Buidler {
 
         // Context
         private Context context;
 
-        // 是否开启日志输出
-        private boolean open = false;
-        // 设置Log默认Tag
+        // Whether to enable log output
+        private boolean open = true;
+        // Default Tag
         private String tag = null;
 
         /*
-         * 自定义解析器
-         * 当输入类型无法满足需求时或无法解析时，可实现Parser接口重写方法来添加自定义解析器
+         * Custom Parser
+         * When the input type can not meet the demand or can not be resolved, can be achieved Parser interface rewriting method to add custom resolver.
          */
         private List<Parser> parsers = new ArrayList<>();
 
@@ -114,7 +107,7 @@ public class LogConfig {
     }
 
     /**
-     * 添加自定义解析器
+     * Add a custom parser
      */
     public LogConfig addParserClass(Class<? extends Parser>... classes) {
         for (Class<? extends Parser> cla : classes) {

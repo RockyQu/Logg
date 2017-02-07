@@ -29,7 +29,7 @@ public class PrinterManager {
     private XmlPrinter xmlPrinter = null;
 
     /**
-     * 参数配置
+     * Parameter configuration
      */
     private LogConfig setting = null;
 
