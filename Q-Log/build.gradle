@@ -6,9 +6,6 @@ publish {
     groupId = 'com.tool.common.log'
     artifactId = 'Q-Log'
     publishVersion = '0.2.0'
-
-    bintrayUser = 'chinarocky'
-    bintrayKey = '2d9b0716cad02a77e6b18c9e701d2a4db5e66530'
 }
 
 android {
