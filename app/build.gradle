@@ -10,6 +10,12 @@ android {
         versionCode 2
         versionName "0.2.0"
     }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
     buildTypes {
         release {
             minifyEnabled false
