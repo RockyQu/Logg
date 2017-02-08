@@ -7,6 +7,7 @@ Android 轻量级简单易用的日志组件
 •  自定义解析器，当输入类型无法满足需求时或无法解析时，可实现Parser接口重写方法来添加自定义解析器  
 
 ##Screenshots
+![screenshots1](https://github.com/DesignQu/Tool-Log/blob/master/ImageFolder/screenshots1.png "screenshots1")
 
 ##Download
 Gradle:
