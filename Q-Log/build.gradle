@@ -1,11 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
+def libraryVersionCode = 2
+def libraryVersionName = '0.2.0'
+
 publish {
     userOrg = 'chinarocky'
     groupId = 'com.tool.common.log'
     artifactId = 'Q-Log'
-    publishVersion = '0.2.0'
+    publishVersion = libraryVersionName
 }
 
 android {
@@ -15,8 +18,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 2
-        versionName "0.2.0"
+        versionCode libraryVersionCode
+        versionName libraryVersionName
     }
 
     lintOptions {
