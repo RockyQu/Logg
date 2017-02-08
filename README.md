@@ -10,11 +10,11 @@ Android 轻量级简单易用的日志组件
 
 ##Download
 Gradle:
-```groovy
+```
 compile 'com.tool.common.log:Q-Log:0.2.0'
 ```
 or Maven:
-```xml
+```
 <dependency>
   <groupId>com.tool.common.log</groupId>
   <artifactId>Q-Log</artifactId>
