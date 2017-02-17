@@ -24,8 +24,8 @@ or Maven:
 </dependency>
 ```
 
-```
 ##History
+```
 v0.2.0  
 •  代码重构  
 •  抽离ANR捕获功能，减少耦合  
