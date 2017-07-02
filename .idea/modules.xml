@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Log/Log.iml" filepath="$PROJECT_DIR$/Log/Log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Logg.iml" filepath="$PROJECT_DIR$/Logg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Q-Log/Q-Log.iml" filepath="$PROJECT_DIR$/Q-Log/Q-Log.iml" />
       <module fileurl="file://$PROJECT_DIR$/Q-Log/Q-Log.iml" filepath="$PROJECT_DIR$/Q-Log/Q-Log.iml" />
       <module fileurl="file://$PROJECT_DIR$/Tool-Log.iml" filepath="$PROJECT_DIR$/Tool-Log.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />

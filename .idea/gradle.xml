@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Q-Log" />
+            <option value="$PROJECT_DIR$/Log" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

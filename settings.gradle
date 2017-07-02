@@ -1,1 +1,1 @@
-include ':app', ':Q-Log'
+include ':app', ':Log'
