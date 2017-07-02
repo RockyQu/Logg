@@ -5,14 +5,14 @@ import com.tool.common.log.log.PrinterManager;
 /**
  * 日志管理器
  */
-public class QLog {
+public class Logg {
 
     /**
      * 日志打印管理器
      */
     private static PrinterManager printer = new PrinterManager();
 
-    public QLog() {
+    public Logg() {
         throw new AssertionError();
     }
 

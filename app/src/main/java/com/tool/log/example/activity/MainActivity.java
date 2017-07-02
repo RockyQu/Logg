@@ -3,7 +3,6 @@ package com.tool.log.example.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -11,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.tool.common.log.QLog;
+import com.tool.common.log.Logg;
 import com.tool.log.example.R;
 import com.tool.log.example.helper.DataHelper;
 
@@ -46,24 +45,24 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.btn_default_log:
                         // 基本数据类型 byte short int long float double char boolean
-                        QLog.v(3.1415926);
+                        Logg.v(3.1415926);
                         // 数组
-                        QLog.d(DataHelper.getArray());
+                        Logg.d(DataHelper.getArray());
                         // Map
-                        QLog.i(DataHelper.getMap());
+                        Logg.i(DataHelper.getMap());
                         // List
-                        QLog.w(DataHelper.getList());
+                        Logg.w(DataHelper.getList());
                         // Intent
-                        QLog.e(DataHelper.getIntent());
+                        Logg.e(DataHelper.getIntent());
                         break;
                     case R.id.btn_json_log:
-                        QLog.json(DataHelper.getJson());
+                        Logg.json(DataHelper.getJson());
                         break;
                     case R.id.btn_xml_log:
-                        QLog.xml(DataHelper.getXml());
+                        Logg.xml(DataHelper.getXml());
                         break;
                     case R.id.btn_big_log:
-                        QLog.d(DataHelper.getBigString(MainActivity.this));
+                        Logg.d(DataHelper.getBigString(MainActivity.this));
                         break;
                     default:
                         break;
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_github:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu")));
                 break;
-            case R.id.action_qlog:
+            case R.id.action_Logg:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu/Logg.git")));
                 break;
         }

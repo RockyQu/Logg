@@ -8,7 +8,7 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_qlog"
+        android:id="@+id/action_Logg"
         android:orderInCategory="100"
         android:title="Logg"
         app:showAsAction="never" />

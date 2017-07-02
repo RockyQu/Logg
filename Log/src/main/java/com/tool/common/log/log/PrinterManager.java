@@ -2,7 +2,7 @@ package com.tool.common.log.log;
 
 import android.text.TextUtils;
 
-import com.tool.common.log.QLog;
+import com.tool.common.log.Logg;
 import com.tool.common.log.log.printer.DefaultPrinter;
 import com.tool.common.log.log.printer.JsonPrinter;
 import com.tool.common.log.log.printer.Type;
@@ -187,11 +187,11 @@ public class PrinterManager {
         for (int i = 5; i < trace.length; i++) {
             StackTraceElement e = trace[i];
 
-            if (QLog.class.equals(Logger.class) && i < trace.length - 1 && trace[i + 1].getClassName()
+            if (Logg.class.equals(Logger.class) && i < trace.length - 1 && trace[i + 1].getClassName()
                     .equals(Logger.class.getName())) {
                 continue;
             }
-            if (e.getClassName().equals(QLog.class.getName())) {
+            if (e.getClassName().equals(Logg.class.getName())) {
                 stackOffset = ++i;
             }
         }
