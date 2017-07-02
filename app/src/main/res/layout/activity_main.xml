@@ -26,9 +26,4 @@
         style="@style/btn_style"
         android:text="Big Log" />
 
-    <Button
-        android:id="@+id/btn_crash"
-        style="@style/btn_style"
-        android:text="Crash Test" />
-
 </LinearLayout>

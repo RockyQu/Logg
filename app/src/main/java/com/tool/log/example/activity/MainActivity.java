@@ -20,12 +20,10 @@ import com.tool.log.example.helper.DataHelper;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnDefaultLog = null;
-    private Button btnJsonLog = null;
-    private Button btnXMLLog = null;
-    private Button btnBigLog = null;
-
-    private Button btnCrash = null;
+    private Button btnDefaultLog;
+    private Button btnJsonLog;
+    private Button btnXMLLog;
+    private Button btnBigLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.logTest();
-
-        this.crashTest();
     }
 
     private void logTest() {
@@ -81,25 +77,6 @@ public class MainActivity extends AppCompatActivity {
         btnBigLog.setOnClickListener(onClickListener);
     }
 
-    private void crashTest() {
-        btnCrash = (Button) findViewById(R.id.btn_crash);
-
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.btn_crash:
-                        throw new RuntimeException("RuntimeException Test");
-                    default:
-                        break;
-                }
-            }
-        };
-
-        btnCrash.setOnClickListener(onClickListener);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about, menu);
@@ -113,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu")));
                 break;
             case R.id.action_qlog:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu/Tool-Log")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu/Logg.git")));
                 break;
         }
 
