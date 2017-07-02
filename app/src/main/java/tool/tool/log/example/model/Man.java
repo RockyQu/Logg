@@ -1,4 +1,4 @@
-package com.tool.log.example.model;
+package tool.tool.log.example.model;
 
 public class Man extends People {
 

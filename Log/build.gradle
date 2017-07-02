@@ -2,11 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 def libraryVersionCode = 2
-def libraryVersionName = '0.2.0'
+def libraryVersionName = '1.0.0'
 
 publish {
     userOrg = 'chinarocky'
-    groupId = 'com.tool.common.log'
+    groupId = 'tool.log'
     artifactId = 'Logg'
     publishVersion = libraryVersionName
 }
@@ -37,4 +37,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.android.support:appcompat-v7:25.1.0'
 }

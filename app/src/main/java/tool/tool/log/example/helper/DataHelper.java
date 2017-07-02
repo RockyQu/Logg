@@ -1,11 +1,11 @@
-package com.tool.log.example.helper;
+package tool.tool.log.example.helper;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.tool.log.example.model.Child;
-import com.tool.log.example.model.Man;
-import com.tool.log.example.model.People;
+import tool.tool.log.example.model.Child;
+import tool.tool.log.example.model.Man;
+import tool.tool.log.example.model.People;
 
 import java.io.IOException;
 import java.io.InputStream;
