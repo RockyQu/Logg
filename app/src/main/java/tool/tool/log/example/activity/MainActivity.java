@@ -10,8 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.tool.log.example.R;
+
 import tool.log.Logg;
-import tool.tool.log.example.R;
 import tool.tool.log.example.helper.DataHelper;
 
 /**
