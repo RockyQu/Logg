@@ -1,4 +1,4 @@
-package tool.log.logg.parser;
+package tool.log.parser;
 
 import android.util.Log;
 

@@ -1,8 +1,8 @@
-package tool.log.logg;
+package tool.log;
 
 import android.content.Context;
 
-import tool.log.logg.parser.Parser;
+import tool.log.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.List;

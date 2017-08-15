@@ -1,4 +1,4 @@
-package tool.log.logg.printer;
+package tool.log.printer;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package tool.log.logg.printer;
+package tool.log.printer;
 
 import java.io.StringReader;
 import java.io.StringWriter;

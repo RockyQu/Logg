@@ -1,12 +1,12 @@
-package tool.log.logg;
+package tool.log;
 
-import tool.log.logg.parser.BundleParse;
-import tool.log.logg.parser.CollectionParse;
-import tool.log.logg.parser.IntentParse;
-import tool.log.logg.parser.MapParse;
-import tool.log.logg.parser.Parser;
-import tool.log.logg.parser.ReferenceParse;
-import tool.log.logg.parser.ThrowableParse;
+import tool.log.parser.BundleParse;
+import tool.log.parser.CollectionParse;
+import tool.log.parser.IntentParse;
+import tool.log.parser.MapParse;
+import tool.log.parser.Parser;
+import tool.log.parser.ReferenceParse;
+import tool.log.parser.ThrowableParse;
 
 /**
  * 常量

@@ -1,6 +1,6 @@
-package tool.log.logg.parser;
+package tool.log.parser;
 
-import tool.log.logg.LogConstant;
+import tool.log.LogConstant;
 
 /**
  * 格式化对象

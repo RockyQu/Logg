@@ -1,4 +1,4 @@
-package tool.log.logg.printer;
+package tool.log.printer;
 
 /**
  * 日志类型

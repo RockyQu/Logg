@@ -1,8 +1,8 @@
-package tool.log.logg.util;
+package tool.log.util;
 
-import tool.log.logg.LogConstant;
-import tool.log.logg.parser.Parser;
-import tool.log.logg.LogConfig;
+import tool.log.LogConstant;
+import tool.log.parser.Parser;
+import tool.log.LogConfig;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

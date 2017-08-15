@@ -1,6 +1,6 @@
-package tool.log.logg.parser;
+package tool.log.parser;
 
-import tool.log.logg.util.ObjectUtil;
+import tool.log.util.ObjectUtil;
 
 import java.util.Map;
 import java.util.Set;

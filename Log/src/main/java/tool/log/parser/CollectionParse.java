@@ -1,7 +1,7 @@
-package tool.log.logg.parser;
+package tool.log.parser;
 
-import tool.log.logg.LogConstant;
-import tool.log.logg.util.ObjectUtil;
+import tool.log.LogConstant;
+import tool.log.util.ObjectUtil;
 
 import java.util.Collection;
 import java.util.Iterator;

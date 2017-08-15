@@ -1,7 +1,5 @@
 package tool.log;
 
-import tool.log.logg.PrinterManager;
-
 /**
  * 日志管理器
  */

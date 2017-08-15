@@ -1,7 +1,7 @@
 package tool.tool.log.example;
 
 import android.app.Application;
-import tool.log.logg.LogConfig;
+import tool.log.LogConfig;
 
 public class LoggApplication extends Application {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tool.log.logg.printer;
+package tool.log.printer;
 
 import android.util.Log;
 

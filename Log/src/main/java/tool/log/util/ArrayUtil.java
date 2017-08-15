@@ -1,4 +1,4 @@
-package tool.log.logg.util;
+package tool.log.util;
 
 import java.util.Arrays;
 

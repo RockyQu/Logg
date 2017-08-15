@@ -1,13 +1,12 @@
-package tool.log.logg;
+package tool.log;
 
 import android.text.TextUtils;
 
-import tool.log.Logg;
-import tool.log.logg.printer.DefaultPrinter;
-import tool.log.logg.printer.JsonPrinter;
-import tool.log.logg.printer.Type;
-import tool.log.logg.printer.XmlPrinter;
-import tool.log.logg.util.ObjectUtil;
+import tool.log.printer.DefaultPrinter;
+import tool.log.printer.JsonPrinter;
+import tool.log.printer.Type;
+import tool.log.printer.XmlPrinter;
+import tool.log.util.ObjectUtil;
 
 import java.util.ArrayList;
 import java.util.List;
