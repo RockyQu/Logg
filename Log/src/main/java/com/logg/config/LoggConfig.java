@@ -47,9 +47,9 @@ public class LoggConfig {
 
     public static class Buidler {
 
-        // Whether to enable log output
+        // 开启Debug模试
         private boolean debug = true;
-        // Default Tag
+        // 输出前缀Tag
         private String tag = null;
 
         /*

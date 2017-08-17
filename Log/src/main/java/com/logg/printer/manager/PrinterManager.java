@@ -119,8 +119,8 @@ public class PrinterManager {
      * @param object
      */
     private synchronized void printer(Type type, Object object) {
-
-        if (!setting.isDebug()) {//是否允许日志输出
+        // 是否允许日志输出
+        if (setting != null && !setting.isDebug()) {
             return;
         }
 
@@ -153,30 +153,43 @@ public class PrinterManager {
     }
 
     /**
-     * 拼装Tag信息
+     * 拼接Tag前缀信息
      *
-     * @return Tag information
+     * @return
      */
     private String getTag() {
-        if (TextUtils.isEmpty(setting.getTag())) {
-            StackTraceElement caller = getCurrentStackTrace();
-            if (caller == null) {
-                return "";
+        if (setting != null) {
+            if (TextUtils.isEmpty(setting.getTag())) {
+                return spliceTag();
+            } else {
+                return setting.getTag();
             }
-            String stackTrace = caller.toString();
-            stackTrace = stackTrace.substring(stackTrace.lastIndexOf('('), stackTrace.length());
-            String callerClazzName = caller.getClassName();
-            callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
-            return String.format("%s.%s%s", callerClazzName, caller.getMethodName(), stackTrace);
         } else {
-            return setting.getTag();
+            return spliceTag();
         }
+    }
+
+    /**
+     * 拼接Tag前缀信息
+     *
+     * @return
+     */
+    private String spliceTag() {
+        StackTraceElement caller = getCurrentStackTrace();
+        if (caller == null) {
+            return "";
+        }
+        String stackTrace = caller.toString();
+        stackTrace = stackTrace.substring(stackTrace.lastIndexOf('('), stackTrace.length());
+        String callerClazzName = caller.getClassName();
+        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
+        return String.format("%s.%s%s", callerClazzName, caller.getMethodName(), stackTrace);
     }
 
     /**
      * 获取当前堆栈信息
      *
-     * @return StackTraceElement
+     * @return
      */
     private StackTraceElement getCurrentStackTrace() {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();

@@ -58,14 +58,17 @@ public class ObjectUtil {
             return object.toString();
         }
 
-        //自定义解析类判断
-        for (Parser parser : LoggConfig.getConfig().getParsers()) {
-            if (parser.parseClassType().isAssignableFrom(object.getClass())) {
-                return parser.parseString(object);
+        // 自定义解析类判断
+        LoggConfig loggConfig = LoggConfig.getConfig();
+        if (loggConfig != null) {
+            for (Parser parser : loggConfig.getParsers()) {
+                if (parser.parseClassType().isAssignableFrom(object.getClass())) {
+                    return parser.parseString(object);
+                }
             }
         }
 
-        //是否是数组
+        // 是否是数组
         if (ArrayUtil.isArray(object)) {
             return ArrayUtil.parseArray(object);
         }
