@@ -1,7 +1,10 @@
-package com.logg;
+package com.logg.printer.manager;
 
 import android.text.TextUtils;
 
+import com.logg.Logg;
+import com.logg.config.LogConfig;
+import com.logg.config.LogConstant;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
 import com.logg.printer.Type;

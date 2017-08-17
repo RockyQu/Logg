@@ -1,5 +1,7 @@
 package com.logg;
 
+import com.logg.printer.manager.PrinterManager;
+
 /**
  * 日志管理器
  */

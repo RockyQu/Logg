@@ -1,6 +1,6 @@
 package com.logg.parser;
 
-import com.logg.LogConstant;
+import com.logg.config.LogConstant;
 
 /**
  * 格式化对象

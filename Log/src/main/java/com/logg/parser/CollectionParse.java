@@ -1,6 +1,6 @@
 package com.logg.parser;
 
-import com.logg.LogConstant;
+import com.logg.config.LogConstant;
 import com.logg.util.ObjectUtil;
 
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package com.logg;
+package com.logg.config;
 
 import com.logg.parser.BundleParse;
 import com.logg.parser.CollectionParse;
