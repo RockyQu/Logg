@@ -1,15 +1,17 @@
-package com.tool.log.example.model;
+package com.logg.example.model;
 
-public class Child {
+import java.io.Serializable;
+
+public class People implements Serializable {
 
     private int id;
     private String name;
 
-    public Child() {
+    public People() {
 
     }
 
-    public Child(int id, String name) {
+    public People(int id, String name) {
         this.id = id;
         this.name = name;
     }

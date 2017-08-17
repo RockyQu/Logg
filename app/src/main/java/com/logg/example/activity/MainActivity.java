@@ -1,4 +1,4 @@
-package com.tool.log.example.activity;
+package com.logg.example.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.tool.log.example.R;
 
 import com.logg.Logg;
-import com.tool.log.example.helper.DataHelper;
+import com.logg.example.helper.DataHelper;
 
 /**
  * 测试
