@@ -3,8 +3,8 @@ package com.logg.printer.manager;
 import android.text.TextUtils;
 
 import com.logg.Logg;
-import com.logg.config.LogConfig;
-import com.logg.config.LogConstant;
+import com.logg.config.LoggConfig;
+import com.logg.config.LoggConstant;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
 import com.logg.printer.Type;
@@ -30,14 +30,14 @@ public class PrinterManager {
     /**
      * Parameter configuration
      */
-    private LogConfig setting = null;
+    private LoggConfig setting = null;
 
     public PrinterManager() {
         defaultPrinter = new DefaultPrinter();
         jsonPrinter = new JsonPrinter();
         xmlPrinter = new XmlPrinter();
 
-        setting = LogConfig.getConfig();
+        setting = LoggConfig.getConfig();
     }
 
     /**
@@ -120,7 +120,7 @@ public class PrinterManager {
      */
     private synchronized void printer(Type type, Object object) {
 
-        if (!setting.isOpen()) {//是否允许日志输出
+        if (!setting.isDebug()) {//是否允许日志输出
             return;
         }
 
@@ -132,7 +132,7 @@ public class PrinterManager {
             case E:
             case WTF:
                 String o = ObjectUtil.objectToString(object);
-                if (o.length() > LogConstant.LINE_MAX) {
+                if (o.length() > LoggConstant.LINE_MAX) {
                     for (String subMsg : bigStringToList(o)) {
                         defaultPrinter.printer(type, getTag(), subMsg);
                     }
@@ -207,7 +207,7 @@ public class PrinterManager {
     private List<String> bigStringToList(String message) {
         List<String> stringList = new ArrayList<>();
         int index = 0;
-        int maxLength = LogConstant.LINE_MAX;
+        int maxLength = LoggConstant.LINE_MAX;
         int countOfSub = message.length() / maxLength;
         if (countOfSub > 0) {
             for (int i = 0; i < countOfSub; i++) {

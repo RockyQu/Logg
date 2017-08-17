@@ -1,8 +1,8 @@
 package com.logg.util;
 
-import com.logg.config.LogConstant;
+import com.logg.config.LoggConstant;
 import com.logg.parser.Parser;
-import com.logg.config.LogConfig;
+import com.logg.config.LoggConfig;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -51,15 +51,15 @@ public class ObjectUtil {
      */
     private static String objectToString(Object object, int childLevel) {
         if (object == null) {
-            return LogConstant.NULL;
+            return LoggConstant.NULL;
         }
 
-        if (childLevel > LogConstant.MAX_LEVEL) {
+        if (childLevel > LoggConstant.MAX_LEVEL) {
             return object.toString();
         }
 
         //自定义解析类判断
-        for (Parser parser : LogConfig.getConfig().getParsers()) {
+        for (Parser parser : LoggConfig.getConfig().getParsers()) {
             if (parser.parseClassType().isAssignableFrom(object.getClass())) {
                 return parser.parseString(object);
             }
@@ -100,7 +100,7 @@ public class ObjectUtil {
         }
 
         if (isSubClass) {
-            builder.append(LogConstant.BR + "=> ");
+            builder.append(LoggConstant.BR + "=> ");
         }
 
         String breakLine = "";
@@ -128,7 +128,7 @@ public class ObjectUtil {
                     } else if (subObject instanceof Character) {
                         subObject = "\'" + subObject + "\'";
                     }
-                    if (childOffset < LogConstant.MAX_LEVEL) {
+                    if (childOffset < LoggConstant.MAX_LEVEL) {
                         subObject = objectToString(subObject, childOffset + 1);
                     }
                 }

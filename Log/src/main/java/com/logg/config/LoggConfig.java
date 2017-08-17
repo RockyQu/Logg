@@ -1,7 +1,5 @@
 package com.logg.config;
 
-import android.content.Context;
-
 import com.logg.parser.Parser;
 
 import java.util.ArrayList;
@@ -10,51 +8,47 @@ import java.util.List;
 /**
  * Log参数配置
  */
-public class LogConfig {
+public class LoggConfig {
 
-    private volatile static LogConfig logConfig;
+    // 这是一个单例
+    private static LoggConfig loggConfig = null;
 
-    private Context context;
-
-    private boolean open = true;
+    private boolean debug = true;
     private String tag = null;
 
     private List<Parser> parsers = new ArrayList<>();
 
-    public LogConfig(Buidler buidler) {
-        this.context = buidler.context;
-        this.open = buidler.open;
+    public LoggConfig(Buidler buidler) {
+        this.debug = buidler.debug;
         this.tag = buidler.tag;
         this.parsers = buidler.parsers;
 
-        this.addParserClass(LogConstant.DEFAULT_PARSER_CLASS);
+        this.addParserClass(LoggConstant.DEFAULT_PARSER_CLASS);
     }
 
-    public static LogConfig getInstance(Buidler buidler) {
-        if (logConfig == null) {
-            synchronized (LogConfig.class) {
-                if (logConfig == null) {
-                    logConfig = new LogConfig(buidler);
+    public static LoggConfig getConfig() {
+        return loggConfig;
+    }
+
+    public static LoggConfig getInstance(Buidler buidler) {
+        if (loggConfig == null) {
+            synchronized (LoggConfig.class) {
+                if (loggConfig == null) {
+                    loggConfig = new LoggConfig(buidler);
                 }
             }
         }
-        return logConfig;
+        return loggConfig;
     }
 
-    public static LogConfig getConfig() {
-        return logConfig;
+    public static Buidler buidler() {
+        return new Buidler();
     }
 
-    /**
-     * basic configuration
-     */
     public static class Buidler {
 
-        // Context
-        private Context context;
-
         // Whether to enable log output
-        private boolean open = true;
+        private boolean debug = true;
         // Default Tag
         private String tag = null;
 
@@ -68,18 +62,6 @@ public class LogConfig {
             ;
         }
 
-        public static Buidler buidler() {
-            return new Buidler();
-        }
-
-        public Buidler setContext(Context context) {
-            if (context == null) {
-                throw new IllegalArgumentException("Context can not be empty!");
-            }
-            this.context = context;
-            return this;
-        }
-
         public Buidler setTag(String tag) {
             if (tag == null) {
                 throw new IllegalArgumentException("Tag can not be empty!");
@@ -88,18 +70,14 @@ public class LogConfig {
             return this;
         }
 
-        public Buidler setOpen(boolean open) {
-            this.open = open;
+        public Buidler setDebug(boolean debug) {
+            this.debug = debug;
             return this;
         }
 
-        public LogConfig build() {
-            return LogConfig.getInstance(this);
+        public LoggConfig build() {
+            return LoggConfig.getInstance(this);
         }
-    }
-
-    public Context getContext() {
-        return context;
     }
 
     public List<Parser> getParsers() {
@@ -109,7 +87,7 @@ public class LogConfig {
     /**
      * Add a custom parser
      */
-    public LogConfig addParserClass(Class<? extends Parser>... classes) {
+    public LoggConfig addParserClass(Class<? extends Parser>... classes) {
         for (Class<? extends Parser> cla : classes) {
             try {
                 parsers.add(0, cla.newInstance());
@@ -120,8 +98,8 @@ public class LogConfig {
         return this;
     }
 
-    public boolean isOpen() {
-        return open;
+    public boolean isDebug() {
+        return debug;
     }
 
     public String getTag() {

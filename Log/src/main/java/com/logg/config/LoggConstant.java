@@ -11,7 +11,7 @@ import com.logg.parser.ThrowableParse;
 /**
  * 常量
  */
-public class LogConstant {
+public class LoggConstant {
 
     // Value is null
     public static final String NULL = "null";

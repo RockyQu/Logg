@@ -1,21 +1,18 @@
 package com.logg.example;
 
 import android.app.Application;
-import com.logg.config.LogConfig;
+import com.logg.config.LoggConfig;
 
 public class LoggApplication extends Application {
-
-    // Log配置
-    private LogConfig logConfig;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        this.logConfig = LogConfig.Buidler
+        LoggConfig
                 .buidler()
-                .setContext(this)
-                .setOpen(true)
+                .setDebug(true)
                 .build();
+
     }
 }

@@ -1,6 +1,6 @@
 package com.logg.parser;
 
-import com.logg.config.LogConstant;
+import com.logg.config.LoggConstant;
 import com.logg.util.ObjectUtil;
 
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class CollectionParse implements Parser<Collection> {
     @Override
     public String parseString(Collection collection) {
         String simpleName = collection.getClass().getName();
-        String msg = "%s size = %d [" + LogConstant.BR;
+        String msg = "%s size = %d [" + LoggConstant.BR;
         msg = String.format(msg, simpleName, collection.size());
         if (!collection.isEmpty()) {
             Iterator<Object> iterator = collection.iterator();
