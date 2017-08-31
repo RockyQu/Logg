@@ -35,10 +35,25 @@ public class PrinterManager {
      */
     private LoggConfig setting = null;
 
+    // 一个细粒度自定义前缀Tag
+    private String tag;
+
+    /**
+     * 提供全局回调接口，如果你设置了此接口，在不影响底层输出的情况下，所有的Log都会回调到这个接口里
+     * 注意控制集合的数量，避免存放过多接口而导致性能上的问题
+     * 注意：不要在 LoggListener 接口的 logg 方法里再调用 Logg 会造成死循环
+     * <p>
+     * 使用方法
+     * Add {@link PrinterManager#addListeners(LoggListener)}
+     * Remove {@link PrinterManager#removeListener(LoggListener)}
+     * Clear {@link PrinterManager#clearListeners()}
+     */
+    private List<LoggListener> listeners = new ArrayList<>();
+
     public PrinterManager() {
-        defaultPrinter = new DefaultPrinter();
-        jsonPrinter = new JsonPrinter();
-        xmlPrinter = new XmlPrinter();
+        defaultPrinter = new DefaultPrinter(listeners);
+        jsonPrinter = new JsonPrinter(listeners);
+        xmlPrinter = new XmlPrinter(listeners);
 
         setting = LoggConfig.getConfig();
     }
@@ -55,8 +70,14 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-#BBBBBB
-     *
+     * @param tag
+     */
+    public PrinterManager tag(String tag) {
+        this.tag = tag;
+        return this;
+    }
+
+    /**
      * @param object
      */
     public void v(Object object) {
@@ -64,8 +85,6 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-#0070BB
-     *
      * @param object
      */
     public void d(Object object) {
@@ -73,8 +92,6 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-#48BB31
-     *
      * @param object
      */
     public void i(Object object) {
@@ -82,8 +99,6 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-# BBBB23
-     *
      * @param object
      */
     public void w(Object object) {
@@ -91,8 +106,6 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-#FF0006
-     *
      * @param object
      */
     public void e(Object object) {
@@ -100,8 +113,6 @@ public class PrinterManager {
     }
 
     /**
-     * 日志输出-#8F0005
-     *
      * @param object
      */
     public void wtf(Object object) {
@@ -164,6 +175,8 @@ public class PrinterManager {
             default:
                 break;
         }
+
+        tag = null;
     }
 
     /**
@@ -173,10 +186,12 @@ public class PrinterManager {
      */
     private String getTag() {
         if (setting != null) {
-            if (TextUtils.isEmpty(setting.getTag())) {
-                return spliceTag();
-            } else {
+            if (!TextUtils.isEmpty(tag)) {
+                return tag;
+            } else if (!TextUtils.isEmpty(setting.getTag())) {
                 return setting.getTag();
+            } else {
+                return spliceTag();
             }
         } else {
             return spliceTag();
@@ -247,5 +262,21 @@ public class PrinterManager {
             stringList.add(message);
         }
         return stringList;
+    }
+
+    public interface LoggListener {
+        void logg(Type type, String tag, String message);
+    }
+
+    public void addListeners(LoggListener listener) {
+        this.listeners.add(listener);
+    }
+
+    public void removeListener(LoggListener listener) {
+        this.listeners.remove(listener);
+    }
+
+    public void clearListeners() {
+        this.listeners.clear();
     }
 }

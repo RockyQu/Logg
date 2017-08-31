@@ -1,7 +1,10 @@
 package com.logg.printer;
 
+import com.logg.printer.manager.PrinterManager;
+
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -15,6 +18,12 @@ import javax.xml.transform.stream.StreamSource;
  * XML Printer
  */
 public class XmlPrinter extends DefaultPrinter {
+
+    private List<PrinterManager.LoggListener> listeners = null;
+
+    public XmlPrinter(List<PrinterManager.LoggListener> listeners) {
+        this.listeners = listeners;
+    }
 
     @Override
     public void printer(Type type, String tag, String object) {

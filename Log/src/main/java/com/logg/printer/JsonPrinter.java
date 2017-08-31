@@ -1,13 +1,23 @@
 package com.logg.printer;
 
+import com.logg.printer.manager.PrinterManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * Json Printer
  */
 public class JsonPrinter extends DefaultPrinter {
+
+    private List<PrinterManager.LoggListener> listeners = null;
+
+    public JsonPrinter(List<PrinterManager.LoggListener> listeners) {
+        this.listeners = listeners;
+    }
 
     /**
      * 缩进量

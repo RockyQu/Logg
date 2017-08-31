@@ -21,7 +21,17 @@ public class Logg {
     }
 
     /**
-     * 日志输出-#BBBBBB
+     * 增加一个细粒度自定义前缀Tag{@link PrinterManager#tag(String)}
+     *
+     * @param tag
+     */
+    public static PrinterManager tag(String tag) {
+        return printer.tag(tag);
+    }
+
+    /**
+     * {@link PrinterManager#v(Object)}
+     * Color #BBBBBB
      *
      * @param object
      */
@@ -30,7 +40,8 @@ public class Logg {
     }
 
     /**
-     * 日志输出-#0070BB
+     * {@link PrinterManager#d(Object)}
+     * Color #0070BB
      *
      * @param object
      */
@@ -39,7 +50,8 @@ public class Logg {
     }
 
     /**
-     * 日志输出-#48BB31
+     * {@link PrinterManager#i(Object)}
+     * Color #48BB31
      *
      * @param object
      */
@@ -48,7 +60,8 @@ public class Logg {
     }
 
     /**
-     * 日志输出-# BBBB23
+     * {@link PrinterManager#w(Object)}
+     * Color #BBBB23
      *
      * @param object
      */
@@ -57,7 +70,8 @@ public class Logg {
     }
 
     /**
-     * 日志输出-#FF0006
+     * {@link PrinterManager#e(Object)}
+     * Color #FF0006
      *
      * @param object
      */
@@ -66,7 +80,8 @@ public class Logg {
     }
 
     /**
-     * 日志输出-#8F0005
+     * {@link PrinterManager#wtf(Object)}
+     * Color #8F0005
      *
      * @param object
      */
@@ -76,6 +91,7 @@ public class Logg {
 
     /**
      * Json
+     * {@link PrinterManager#json(Object)}
      *
      * @param object
      */
@@ -85,10 +101,15 @@ public class Logg {
 
     /**
      * XML
+     * {@link PrinterManager#xml(Object)}
      *
      * @param object
      */
     public static void xml(Object object) {
         printer.xml(object);
+    }
+
+    public static PrinterManager getPrinter() {
+        return printer;
     }
 }
