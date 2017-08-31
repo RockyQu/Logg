@@ -10,7 +10,11 @@ public class Logg {
     /**
      * 日志打印管理器
      */
-    private static PrinterManager printer = new PrinterManager();
+    private static PrinterManager printer = null;
+
+    static {
+        printer = PrinterManager.get();
+    }
 
     public Logg() {
         throw new AssertionError();

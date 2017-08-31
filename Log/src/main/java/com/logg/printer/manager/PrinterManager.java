@@ -1,6 +1,7 @@
 package com.logg.printer.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.logg.Logg;
 import com.logg.config.LoggConfig;
@@ -20,6 +21,9 @@ import java.util.logging.Logger;
  */
 public class PrinterManager {
 
+    // PrinterManager
+    private static PrinterManager printerManager = null;
+
     // Default Printer
     private DefaultPrinter defaultPrinter = null;
     // Json Printer
@@ -38,6 +42,17 @@ public class PrinterManager {
         xmlPrinter = new XmlPrinter();
 
         setting = LoggConfig.getConfig();
+    }
+
+    public static synchronized PrinterManager get() {
+        if (printerManager == null) {
+            synchronized (PrinterManager.class) {
+                if (printerManager == null) {
+                    printerManager = new PrinterManager();
+                }
+            }
+        }
+        return printerManager;
     }
 
     /**
