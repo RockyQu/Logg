@@ -4,7 +4,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 def libraryVersionCode = 5
-def libraryVersionName = '1.0.4'
+def libraryVersionName = '1.1.0'
 
 publish {
     userOrg = 'chinarocky'// 这是代码仓库的账号
