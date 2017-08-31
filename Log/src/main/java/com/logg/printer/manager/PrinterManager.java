@@ -1,7 +1,6 @@
 package com.logg.printer.manager;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.logg.Logg;
 import com.logg.config.LoggConfig;
