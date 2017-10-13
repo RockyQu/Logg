@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Logg.getPrinter().addListeners(new PrinterManager.LoggListener() {
             @Override
             public void logg(Type type, String tag, String message) {
-//                Log.e(tag, message);
+                Log.e(tag, message);
             }
         });
     }

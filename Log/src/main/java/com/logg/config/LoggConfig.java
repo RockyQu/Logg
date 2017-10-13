@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Log参数配置
+ * 参数配置
  */
 public class LoggConfig {
 
-    // 这是一个单例
     private static LoggConfig loggConfig = null;
 
     private boolean debug = true;

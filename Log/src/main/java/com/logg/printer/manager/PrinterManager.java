@@ -52,8 +52,8 @@ public class PrinterManager {
 
     public PrinterManager() {
         defaultPrinter = new DefaultPrinter(listeners);
-        jsonPrinter = new JsonPrinter(listeners);
-        xmlPrinter = new XmlPrinter(listeners);
+        jsonPrinter = new JsonPrinter();
+        xmlPrinter = new XmlPrinter();
 
         setting = LoggConfig.getConfig();
     }
@@ -144,7 +144,7 @@ public class PrinterManager {
      * @param object
      */
     private synchronized void printer(Type type, Object object) {
-        // 是否允许日志输出
+
         if (setting != null && !setting.isDebug()) {
             return;
         }

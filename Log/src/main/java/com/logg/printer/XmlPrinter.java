@@ -19,10 +19,8 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class XmlPrinter extends DefaultPrinter {
 
-    private List<PrinterManager.LoggListener> listeners = null;
+    public XmlPrinter() {
 
-    public XmlPrinter(List<PrinterManager.LoggListener> listeners) {
-        this.listeners = listeners;
     }
 
     @Override

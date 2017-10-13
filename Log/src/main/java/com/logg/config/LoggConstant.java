@@ -23,7 +23,7 @@ public class LoggConstant {
     public static final String BR = System.getProperty("line.separator");
 
     // 每行最大日志长度
-    public static final int LINE_MAX = 1024 * 3;
+    public static final int LINE_MAX = 1024 * 4;
 
     // 默认支持解析库
     public static final Class<? extends Parser>[] DEFAULT_PARSER_CLASS = new Class[]{
