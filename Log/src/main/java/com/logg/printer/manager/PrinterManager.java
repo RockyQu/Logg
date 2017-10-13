@@ -269,11 +269,15 @@ public class PrinterManager {
     }
 
     public void addListeners(LoggListener listener) {
-        this.listeners.add(listener);
+        if (listener != null) {
+            this.listeners.add(listener);
+        }
     }
 
     public void removeListener(LoggListener listener) {
-        this.listeners.remove(listener);
+        if (listener != null) {
+            this.listeners.remove(listener);
+        }
     }
 
     public void clearListeners() {
