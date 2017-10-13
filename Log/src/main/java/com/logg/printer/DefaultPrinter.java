@@ -39,6 +39,7 @@ public class DefaultPrinter implements Printer {
 
     @Override
     public void printer(Type type, String tag, String object) {
+        Log.e("bbbbbbbbbb","DefaultPrinter printer");
         switch (type) {
             case V:
                 Log.v(tag, object);
@@ -69,6 +70,7 @@ public class DefaultPrinter implements Printer {
         }
 
         if (listeners != null && listeners.size() != 0) {
+            Log.e("bbbbbbbbbb","listeners "+listeners.size());
             for (PrinterManager.LoggListener listener : listeners) {
                 listener.logg(type, tag, object);
             }

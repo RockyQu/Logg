@@ -9,14 +9,14 @@ import com.logg.parser.ReferenceParse;
 import com.logg.parser.ThrowableParse;
 
 /**
- * 常量
+ * 常量配置
  */
 public class LoggConstant {
 
     // Value is null
     public static final String NULL = "null";
 
-    // 解析属性最大层级
+    // 解析属性最大层级，请不要将 MAX_LEVEL 设置过高，可能会带来方法嵌套调用性能问题
     public static final int MAX_LEVEL = 2;
 
     // 换行符

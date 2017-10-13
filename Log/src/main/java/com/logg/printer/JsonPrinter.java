@@ -1,5 +1,7 @@
 package com.logg.printer;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +36,7 @@ public class JsonPrinter extends DefaultPrinter {
         } catch (JSONException e) {
             json = object;
         }
+        Log.e("aaaaaaaaaa","JsonPrinter printer");
         super.printer(type, tag, json);
     }
 }

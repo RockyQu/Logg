@@ -176,11 +176,20 @@ public class PrinterManager {
                 break;
         }
 
+        this.clearCurrentTag();
+    }
+
+    /**
+     * 请空当前 Tag 信息
+     *
+     * @return
+     */
+    private void clearCurrentTag() {
         tag = null;
     }
 
     /**
-     * 拼接Tag前缀信息
+     * 拼接 Tag 前缀信息
      *
      * @return
      */
@@ -199,7 +208,7 @@ public class PrinterManager {
     }
 
     /**
-     * 拼接Tag前缀信息
+     * 拼接 Tag 前缀信息
      *
      * @return
      */
@@ -241,7 +250,7 @@ public class PrinterManager {
     }
 
     /**
-     * 超大文本字符串转化为List
+     * 超大文本字符串转化为 List
      *
      * @param message
      * @return
