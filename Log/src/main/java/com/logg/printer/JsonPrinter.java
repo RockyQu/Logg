@@ -36,7 +36,7 @@ public class JsonPrinter extends DefaultPrinter {
         } catch (JSONException e) {
             json = object;
         }
-        Log.e("aaaaaaaaaa","JsonPrinter printer");
+
         super.printer(type, tag, json);
     }
 }

@@ -7,6 +7,7 @@ import com.logg.config.LoggConfig;
 import com.logg.config.LoggConstant;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
+import com.logg.printer.Printer;
 import com.logg.printer.Type;
 import com.logg.printer.XmlPrinter;
 import com.logg.util.ObjectUtil;
@@ -24,11 +25,11 @@ public class PrinterManager {
     private static PrinterManager printerManager = null;
 
     // Default Printer
-    private DefaultPrinter defaultPrinter = null;
+    private Printer defaultPrinter = null;
     // Json Printer
-    private JsonPrinter jsonPrinter = null;
+    private Printer jsonPrinter = null;
     // XML Printer
-    private XmlPrinter xmlPrinter = null;
+    private Printer xmlPrinter = null;
 
     /**
      * Parameter configuration
@@ -38,20 +39,8 @@ public class PrinterManager {
     // 一个细粒度自定义前缀Tag
     private String tag;
 
-    /**
-     * 提供全局回调接口，如果你设置了此接口，在不影响底层输出的情况下，所有的Log都会回调到这个接口里
-     * 注意控制集合的数量，避免存放过多接口而导致性能上的问题
-     * 注意：不要在 LoggListener 接口的 logg 方法里再调用 Logg 会造成死循环
-     * <p>
-     * 使用方法
-     * Add {@link PrinterManager#addListeners(LoggListener)}
-     * Remove {@link PrinterManager#removeListener(LoggListener)}
-     * Clear {@link PrinterManager#clearListeners()}
-     */
-    private List<LoggListener> listeners = new ArrayList<>();
-
     public PrinterManager() {
-        defaultPrinter = new DefaultPrinter(listeners);
+        defaultPrinter = new DefaultPrinter();
         jsonPrinter = new JsonPrinter();
         xmlPrinter = new XmlPrinter();
 
@@ -173,6 +162,7 @@ public class PrinterManager {
                 xmlPrinter.printer(type, getTag(), ObjectUtil.objectToString(object));
                 break;
             default:
+                defaultPrinter.printer(type, getTag(), ObjectUtil.objectToString(object));
                 break;
         }
 
@@ -271,25 +261,5 @@ public class PrinterManager {
             stringList.add(message);
         }
         return stringList;
-    }
-
-    public interface LoggListener {
-        void logg(Type type, String tag, String message);
-    }
-
-    public void addListeners(LoggListener listener) {
-        if (listener != null) {
-            this.listeners.add(listener);
-        }
-    }
-
-    public void removeListener(LoggListener listener) {
-        if (listener != null) {
-            this.listeners.remove(listener);
-        }
-    }
-
-    public void clearListeners() {
-        this.listeners.clear();
     }
 }

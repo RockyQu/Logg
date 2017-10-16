@@ -11,8 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.logg.interceptor.callback.GlobalCallback;
+import com.logg.interceptor.callback.LoggCallback;
 import com.logg.printer.Type;
-import com.logg.printer.manager.PrinterManager;
 import com.tool.log.example.R;
 
 import com.logg.Logg;
@@ -80,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         btnXMLLog.setOnClickListener(onClickListener);
         btnBigLog.setOnClickListener(onClickListener);
 
-        Logg.getPrinter().addListeners(new PrinterManager.LoggListener() {
+        GlobalCallback.getInstance().addCallback(new LoggCallback() {
+
             @Override
             public void logg(Type type, String tag, String message) {
                 Log.e(tag, message);

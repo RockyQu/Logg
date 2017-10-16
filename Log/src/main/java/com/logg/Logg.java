@@ -108,8 +108,4 @@ public class Logg {
     public static void xml(Object object) {
         printer.xml(object);
     }
-
-    public static PrinterManager getPrinter() {
-        return printer;
-    }
 }

@@ -18,28 +18,20 @@ package com.logg.printer;
 
 import android.util.Log;
 
-import com.logg.printer.manager.PrinterManager;
-
-import java.util.List;
+import com.logg.interceptor.callback.GlobalCallback;
 
 /**
  * Default Printer
  */
 public class DefaultPrinter implements Printer {
 
-    private List<PrinterManager.LoggListener> listeners = null;
-
     public DefaultPrinter() {
 
     }
 
-    public DefaultPrinter(List<PrinterManager.LoggListener> listeners) {
-        this.listeners = listeners;
-    }
-
     @Override
     public void printer(Type type, String tag, String object) {
-        Log.e("bbbbbbbbbb","DefaultPrinter printer");
+
         switch (type) {
             case V:
                 Log.v(tag, object);
@@ -69,11 +61,6 @@ public class DefaultPrinter implements Printer {
                 break;
         }
 
-        if (listeners != null && listeners.size() != 0) {
-            Log.e("bbbbbbbbbb","listeners "+listeners.size());
-            for (PrinterManager.LoggListener listener : listeners) {
-                listener.logg(type, tag, object);
-            }
-        }
+        GlobalCallback.getInstance().printerAll(type, tag, object);
     }
 }
