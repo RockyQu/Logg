@@ -1,5 +1,7 @@
 package com.logg.printer;
 
+import com.logg.config.LoggConfiguration;
+
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -16,8 +18,8 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class XmlPrinter extends DefaultPrinter {
 
-    public XmlPrinter() {
-
+    public XmlPrinter(LoggConfiguration configuration) {
+        super(configuration);
     }
 
     @Override

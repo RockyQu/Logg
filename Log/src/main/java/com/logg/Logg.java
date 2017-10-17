@@ -1,6 +1,7 @@
 package com.logg;
 
-import com.logg.interceptor.LoggInterceptor;
+import com.logg.config.LoggConfiguration;
+import com.logg.interceptor.Interceptor;
 import com.logg.printer.manager.IPrinterManager;
 import com.logg.printer.manager.PrinterManager;
 
@@ -15,11 +16,19 @@ public class Logg {
     private static IPrinterManager printer = null;
 
     static {
-        printer = PrinterManager.get();
+        printer = PrinterManager.getInstance();
     }
 
     public Logg() {
         throw new AssertionError();
+    }
+
+    public static void init() {
+        printer.init();
+    }
+
+    public static void init(LoggConfiguration configuration) {
+        printer.init(configuration);
     }
 
     /**
@@ -134,15 +143,15 @@ public class Logg {
         printer.xml(tag, object);
     }
 
-    public static void addInterceptor(LoggInterceptor interceptor) {
+    public static void addInterceptor(Interceptor interceptor) {
         printer.addInterceptor(interceptor);
     }
 
-    public static void removeInterceptor(LoggInterceptor interceptor) {
-
+    public static void removeInterceptor(Interceptor interceptor) {
+        printer.removeInterceptor(interceptor);
     }
 
     public static void clearInterceptors() {
-
+        printer.clearInterceptors();
     }
 }

@@ -3,15 +3,16 @@ package com.logg.printer.manager;
 import android.text.TextUtils;
 
 import com.logg.Logg;
-import com.logg.config.LoggConfig;
+import com.logg.config.LoggConfiguration;
 import com.logg.config.LoggConstant;
-import com.logg.interceptor.LoggInterceptor;
+import com.logg.interceptor.Interceptor;
+import com.logg.interceptor.LoggStructure;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
 import com.logg.printer.Printer;
 import com.logg.printer.Type;
 import com.logg.printer.XmlPrinter;
-import com.logg.util.ObjectUtil;
+import com.logg.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +22,6 @@ import java.util.logging.Logger;
  * 日志管理器
  */
 public class PrinterManager implements IPrinterManager {
-
-    // PrinterManager
-    private static IPrinterManager printerManager = null;
 
     // Default Printer
     private Printer defaultPrinter = null;
@@ -35,30 +33,45 @@ public class PrinterManager implements IPrinterManager {
     /**
      * LoggInterceptors
      */
-    private final List<LoggInterceptor> interceptors = new ArrayList<>();
+    private final List<Interceptor> interceptors = new ArrayList<>();
 
     /**
      * Parameter configuration
      */
-    private LoggConfig setting = null;
+    private LoggConfiguration configuration = null;
 
-    public PrinterManager() {
-        defaultPrinter = new DefaultPrinter();
-        jsonPrinter = new JsonPrinter();
-        xmlPrinter = new XmlPrinter();
+    private PrinterManager() {
 
-        setting = LoggConfig.getConfig();
     }
 
-    public static synchronized IPrinterManager get() {
-        if (printerManager == null) {
-            synchronized (PrinterManager.class) {
-                if (printerManager == null) {
-                    printerManager = new PrinterManager();
-                }
-            }
+    private final static class SingletonHolder {
+        private final static IPrinterManager INSTANCE = new PrinterManager();
+    }
+
+    public static IPrinterManager getInstance() {
+        return SingletonHolder.INSTANCE;
+    }
+
+    @Override
+    public void init() {
+        LoggConfiguration configuration = new LoggConfiguration.Buidler()
+                .setDebug(true)
+                .build();
+
+        this.init(configuration);
+    }
+
+    @Override
+    public void init(LoggConfiguration configuration) {
+        if (configuration == null) {
+            throw new NullPointerException("LoggConfiguration == null");
         }
-        return printerManager;
+
+        this.configuration = configuration;
+
+        defaultPrinter = new DefaultPrinter(this.configuration);
+        jsonPrinter = new JsonPrinter(this.configuration);
+        xmlPrinter = new XmlPrinter(this.configuration);
     }
 
     @Override
@@ -152,14 +165,14 @@ public class PrinterManager implements IPrinterManager {
     }
 
     @Override
-    public void addInterceptor(LoggInterceptor interceptor) {
+    public void addInterceptor(Interceptor interceptor) {
         if (interceptor != null) {
             interceptors.add(interceptor);
         }
     }
 
     @Override
-    public void removeInterceptor(LoggInterceptor interceptor) {
+    public void removeInterceptor(Interceptor interceptor) {
         if (interceptor != null) {
             interceptors.remove(interceptor);
         }
@@ -177,13 +190,25 @@ public class PrinterManager implements IPrinterManager {
      * @param object
      */
     private synchronized void printer(Type type, String tag, Object object) {
-        if (setting != null && !setting.isDebug()) {
+        if (configuration != null && !configuration.isDebug()) {
             return;
         }
 
-        for (LoggInterceptor interceptor : interceptors) {
-            if (interceptor.isLoggable()) {
-                interceptor.proceed(type, tag, object);
+        LoggStructure item = new LoggStructure(type, tag, object, null);
+        for (Interceptor interceptor : interceptors) {
+            if (interceptor.isLoggable(type)) {
+                item = interceptor.intercept(item);
+                if (item == null) {
+                    throw new NullPointerException("LoggCallback == null");
+                }
+
+                if (item.getTag() == null) {
+                    throw new NullPointerException("Tag == null, You can modify Tag, but can not empty Tag.");
+                }
+
+                if (item.getObject() == null) {
+                    throw new NullPointerException("Object == null, You can modify the log information, but you can not clear the log information.");
+                }
             }
         }
 
@@ -194,9 +219,9 @@ public class PrinterManager implements IPrinterManager {
             case W:
             case E:
             case WTF:
-                String o = ObjectUtil.objectToString(object);
+                String o = Utils.objectToString(object);
                 if (o.length() > LoggConstant.LINE_MAX) {
-                    for (String subMsg : bigStringToList(o)) {
+                    for (String subMsg : Utils.bigStringToList(o)) {
                         defaultPrinter.printer(type, tag, subMsg);
                     }
                     return;
@@ -205,13 +230,13 @@ public class PrinterManager implements IPrinterManager {
                 }
                 break;
             case J:
-                jsonPrinter.printer(type, tag, ObjectUtil.objectToString(object));
+                jsonPrinter.printer(type, tag, Utils.objectToString(object));
                 break;
             case X:
-                xmlPrinter.printer(type, tag, ObjectUtil.objectToString(object));
+                xmlPrinter.printer(type, tag, Utils.objectToString(object));
                 break;
             default:
-                defaultPrinter.printer(type, tag, ObjectUtil.objectToString(object));
+                defaultPrinter.printer(type, tag, Utils.objectToString(object));
                 break;
         }
     }
@@ -222,14 +247,14 @@ public class PrinterManager implements IPrinterManager {
      * @return
      */
     private String getTag() {
-        if (setting != null) {
-            if (!TextUtils.isEmpty(setting.getTag())) {
-                return setting.getTag();
+        if (configuration != null) {
+            if (!TextUtils.isEmpty(configuration.getTag())) {
+                return configuration.getTag();
             } else {
-                return spliceTag();
+                return getStackTraceFormatter();
             }
         } else {
-            return spliceTag();
+            return getStackTraceFormatter();
         }
     }
 
@@ -238,7 +263,7 @@ public class PrinterManager implements IPrinterManager {
      *
      * @return
      */
-    private String spliceTag() {
+    private String getStackTraceFormatter() {
         StackTraceElement caller = getCurrentStackTrace();
         if (caller == null) {
             return "";
@@ -259,10 +284,8 @@ public class PrinterManager implements IPrinterManager {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 
         int stackOffset = -1;
-
         for (int i = 5; i < trace.length; i++) {
             StackTraceElement e = trace[i];
-
             if (Logg.class.equals(Logger.class) && i < trace.length - 1 && trace[i + 1].getClassName()
                     .equals(Logger.class.getName())) {
                 continue;
@@ -275,27 +298,8 @@ public class PrinterManager implements IPrinterManager {
         return stackOffset != -1 ? trace[stackOffset] : null;
     }
 
-    /**
-     * 超大文本字符串转化为 List
-     *
-     * @param message
-     * @return
-     */
-    private List<String> bigStringToList(String message) {
-        List<String> stringList = new ArrayList<>();
-        int index = 0;
-        int maxLength = LoggConstant.LINE_MAX;
-        int countOfSub = message.length() / maxLength;
-        if (countOfSub > 0) {
-            for (int i = 0; i < countOfSub; i++) {
-                String sub = message.substring(index, index + maxLength);
-                stringList.add(sub);
-                index += maxLength;
-            }
-            stringList.add(message.substring(index, message.length()));
-        } else {
-            stringList.add(message);
-        }
-        return stringList;
+    @Override
+    public LoggConfiguration getConfiguration() {
+        return configuration;
     }
 }

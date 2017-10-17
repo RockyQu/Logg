@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.logg.interceptor.LoggInterceptor;
 import com.logg.interceptor.callback.GlobalCallback;
-import com.logg.interceptor.callback.LoggStrategy;
+import com.logg.interceptor.callback.LoggCallback;
 import com.logg.printer.Type;
 import com.tool.log.example.R;
 
@@ -82,20 +82,10 @@ public class MainActivity extends AppCompatActivity {
         btnXMLLog.setOnClickListener(onClickListener);
         btnBigLog.setOnClickListener(onClickListener);
 
-        Logg.addInterceptor(new LoggInterceptor() {
+        Logg.addInterceptor(new LoggInterceptor());
 
-            @Override
-            public boolean isLoggable() {
-                return true;
-            }
-
-            @Override
-            public void proceed(Type type, String tag, Object object) {
-
-            }
-        });
-
-        GlobalCallback.getInstance().addCallback(new LoggStrategy() {
+        // 添加一个全局监听
+        GlobalCallback.getInstance().addCallback(new LoggCallback() {
 
             @Override
             public void logg(Type type, String tag, String message) {

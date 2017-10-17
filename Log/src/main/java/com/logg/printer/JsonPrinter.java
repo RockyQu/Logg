@@ -1,5 +1,7 @@
 package com.logg.printer;
 
+import com.logg.config.LoggConfiguration;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,8 +11,8 @@ import org.json.JSONObject;
  */
 public class JsonPrinter extends DefaultPrinter {
 
-    public JsonPrinter() {
-
+    public JsonPrinter(LoggConfiguration configuration) {
+        super(configuration);
     }
 
     /**

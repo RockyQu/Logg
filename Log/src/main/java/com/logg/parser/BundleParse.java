@@ -2,7 +2,7 @@ package com.logg.parser;
 
 import android.os.Bundle;
 
-import com.logg.util.ObjectUtil;
+import com.logg.util.Utils;
 
 /**
  * Bundle
@@ -20,7 +20,7 @@ public class BundleParse implements Parser<Bundle> {
             StringBuilder builder = new StringBuilder(bundle.getClass().getName() + " [" + LINE_SEPARATOR);
             for (String key : bundle.keySet()) {
                 builder.append(String.format("'%s' => %s " + LINE_SEPARATOR,
-                        key, ObjectUtil.objectToString(bundle.get(key))));
+                        key, Utils.objectToString(bundle.get(key))));
             }
             builder.append("]");
             return builder.toString();

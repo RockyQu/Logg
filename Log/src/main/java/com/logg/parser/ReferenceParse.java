@@ -1,6 +1,6 @@
 package com.logg.parser;
 
-import com.logg.util.ObjectUtil;
+import com.logg.util.Utils;
 
 import java.lang.ref.Reference;
 
@@ -19,7 +19,7 @@ public class ReferenceParse implements Parser<Reference> {
         Object actual = reference.get();
         StringBuilder builder = new StringBuilder(reference.getClass().getSimpleName() + "<"
                 + actual.getClass().getSimpleName() + "> {");
-        builder.append("→" + ObjectUtil.objectToString(actual));
+        builder.append("→" + Utils.objectToString(actual));
         return builder.toString() + "}";
     }
 }

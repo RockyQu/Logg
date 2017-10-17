@@ -2,6 +2,7 @@ package com.logg.printer;
 
 import android.util.Log;
 
+import com.logg.config.LoggConfiguration;
 import com.logg.interceptor.callback.GlobalCallback;
 
 /**
@@ -9,8 +10,10 @@ import com.logg.interceptor.callback.GlobalCallback;
  */
 public class DefaultPrinter implements Printer {
 
-    public DefaultPrinter() {
+    private LoggConfiguration configuration;
 
+    public DefaultPrinter(LoggConfiguration configuration) {
+        this.configuration = configuration;
     }
 
     @Override

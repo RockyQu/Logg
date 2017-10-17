@@ -1,8 +1,13 @@
 package com.logg.printer.manager;
 
-import com.logg.interceptor.LoggInterceptor;
+import com.logg.config.LoggConfiguration;
+import com.logg.interceptor.Interceptor;
 
 public interface IPrinterManager {
+
+    void init();
+
+    void init(LoggConfiguration configuration);
 
     void v(Object object);
 
@@ -36,9 +41,11 @@ public interface IPrinterManager {
 
     void xml(String tag, Object object);
 
-    void addInterceptor(LoggInterceptor interceptor);
+    void addInterceptor(Interceptor interceptor);
 
-    void removeInterceptor(LoggInterceptor interceptor);
+    void removeInterceptor(Interceptor interceptor);
 
     void clearInterceptors();
+
+    LoggConfiguration getConfiguration();
 }

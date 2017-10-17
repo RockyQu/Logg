@@ -1,7 +1,7 @@
 package com.logg.parser;
 
 import com.logg.config.LoggConstant;
-import com.logg.util.ObjectUtil;
+import com.logg.util.Utils;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,7 +27,7 @@ public class CollectionParse implements Parser<Collection> {
             while (iterator.hasNext()) {
                 String itemString = "[%d]:%s%s";
                 Object item = iterator.next();
-                msg += String.format(itemString, flag, ObjectUtil.objectToString(item),
+                msg += String.format(itemString, flag, Utils.objectToString(item),
                         flag++ < collection.size() - 1 ? "," + LINE_SEPARATOR : LINE_SEPARATOR);
             }
         }

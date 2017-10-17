@@ -8,16 +8,14 @@ import java.util.List;
 /**
  * 参数配置
  */
-public class LoggConfig {
-
-    private static LoggConfig loggConfig = null;
+public class LoggConfiguration {
 
     private boolean debug = true;
     private String tag = null;
 
     private List<Parser> parsers = new ArrayList<>();
 
-    public LoggConfig(Buidler buidler) {
+    public LoggConfiguration(Buidler buidler) {
         this.debug = buidler.debug;
         this.tag = buidler.tag;
         this.parsers = buidler.parsers;
@@ -25,39 +23,26 @@ public class LoggConfig {
         this.addParserClass(LoggConstant.DEFAULT_PARSER_CLASS);
     }
 
-    public static LoggConfig getConfig() {
-        return loggConfig;
-    }
-
-    public static LoggConfig getInstance(Buidler buidler) {
-        if (loggConfig == null) {
-            synchronized (LoggConfig.class) {
-                if (loggConfig == null) {
-                    loggConfig = new LoggConfig(buidler);
-                }
-            }
-        }
-        return loggConfig;
-    }
-
-    public static Buidler buidler() {
-        return new Buidler();
-    }
-
     public static class Buidler {
 
-        // 开启Debug模试
+        /**
+         * 是否开启Debug模试
+         * 在发布正式版本,应该关闭Log日志的输出
+         */
         private boolean debug = true;
-        // 输出前缀Tag
+
+        /**
+         * 所有日志的前缀Tag
+         * 如果你设置的单个日志Tag会覆盖此变量
+         */
         private String tag = null;
 
-        /*
-         * Custom Parser
-         * When the input type can not meet the demand or can not be resolved, can be achieved Parser interface rewriting method to add custom resolver.
+        /**
+         * 如果你想处理解析一些此框架不支持的数据,可以实现{@link Parser}接口,实现自己的解析方式
          */
         private List<Parser> parsers = new ArrayList<>();
 
-        private Buidler() {
+        public Buidler() {
             ;
         }
 
@@ -74,8 +59,8 @@ public class LoggConfig {
             return this;
         }
 
-        public LoggConfig build() {
-            return LoggConfig.getInstance(this);
+        public LoggConfiguration build() {
+            return new LoggConfiguration(this);
         }
     }
 
@@ -86,7 +71,7 @@ public class LoggConfig {
     /**
      * Add a custom parser
      */
-    public LoggConfig addParserClass(Class<? extends Parser>... classes) {
+    public LoggConfiguration addParserClass(Class<? extends Parser>... classes) {
         for (Class<? extends Parser> cla : classes) {
             try {
                 parsers.add(0, cla.newInstance());

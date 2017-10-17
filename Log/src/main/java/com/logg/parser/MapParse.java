@@ -1,6 +1,6 @@
 package com.logg.parser;
 
-import com.logg.util.ObjectUtil;
+import com.logg.util.Utils;
 
 import java.util.Map;
 import java.util.Set;
@@ -29,8 +29,8 @@ public class MapParse implements Parser<Map> {
                     value = "\'" + value + "\'";
                 }
             }
-            msg += String.format(itemString, ObjectUtil.objectToString(key),
-                    ObjectUtil.objectToString(value));
+            msg += String.format(itemString, Utils.objectToString(key),
+                    Utils.objectToString(value));
         }
         return msg + "]";
     }

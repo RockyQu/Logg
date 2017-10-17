@@ -1,7 +1,9 @@
 package com.logg.example;
 
 import android.app.Application;
-import com.logg.config.LoggConfig;
+
+import com.logg.Logg;
+import com.logg.config.LoggConfiguration;
 
 public class LoggApplication extends Application {
 
@@ -9,10 +11,10 @@ public class LoggApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        LoggConfig
-                .buidler()
+        LoggConfiguration configuration = new LoggConfiguration.Buidler()
                 .setDebug(true)
+//                .setTag("test")// 自定义全局Tag
                 .build();
-
+        Logg.init(configuration);
     }
 }
