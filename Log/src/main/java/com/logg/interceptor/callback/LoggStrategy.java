@@ -12,7 +12,7 @@ import java.util.List;
  * <p>
  * 使用方法
  */
-public interface LoggCallback {
+public interface LoggStrategy {
 
     void logg(Type type, String tag, String message);
 }

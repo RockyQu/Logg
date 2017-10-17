@@ -11,8 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.logg.interceptor.LoggInterceptor;
 import com.logg.interceptor.callback.GlobalCallback;
-import com.logg.interceptor.callback.LoggCallback;
+import com.logg.interceptor.callback.LoggStrategy;
 import com.logg.printer.Type;
 import com.tool.log.example.R;
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_default_log:
                         // 基本数据类型 byte short int long float double char boolean
                         Logg.v(3.1415926);
-                        Logg.tag("test").v(3.1415926);
+                        Logg.v("test", 3.1415926);
                         // 数组
                         Logg.d(DataHelper.getArray());
                         // Map
@@ -81,7 +82,20 @@ public class MainActivity extends AppCompatActivity {
         btnXMLLog.setOnClickListener(onClickListener);
         btnBigLog.setOnClickListener(onClickListener);
 
-        GlobalCallback.getInstance().addCallback(new LoggCallback() {
+        Logg.addInterceptor(new LoggInterceptor() {
+
+            @Override
+            public boolean isLoggable() {
+                return true;
+            }
+
+            @Override
+            public void proceed(Type type, String tag, Object object) {
+
+            }
+        });
+
+        GlobalCallback.getInstance().addCallback(new LoggStrategy() {
 
             @Override
             public void logg(Type type, String tag, String message) {

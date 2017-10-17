@@ -1,5 +1,7 @@
 package com.logg;
 
+import com.logg.interceptor.LoggInterceptor;
+import com.logg.printer.manager.IPrinterManager;
 import com.logg.printer.manager.PrinterManager;
 
 /**
@@ -10,7 +12,7 @@ public class Logg {
     /**
      * 日志打印管理器
      */
-    private static PrinterManager printer = null;
+    private static IPrinterManager printer = null;
 
     static {
         printer = PrinterManager.get();
@@ -18,15 +20,6 @@ public class Logg {
 
     public Logg() {
         throw new AssertionError();
-    }
-
-    /**
-     * 增加一个细粒度自定义前缀Tag{@link PrinterManager#tag(String)}
-     *
-     * @param tag
-     */
-    public static PrinterManager tag(String tag) {
-        return printer.tag(tag);
     }
 
     /**
@@ -39,6 +32,10 @@ public class Logg {
         printer.v(object);
     }
 
+    public static void v(String tag, Object object) {
+        printer.v(tag, object);
+    }
+
     /**
      * {@link PrinterManager#d(Object)}
      * Color #0070BB
@@ -47,6 +44,10 @@ public class Logg {
      */
     public static void d(Object object) {
         printer.d(object);
+    }
+
+    public static void d(String tag, Object object) {
+        printer.d(tag, object);
     }
 
     /**
@@ -59,6 +60,10 @@ public class Logg {
         printer.i(object);
     }
 
+    public static void i(String tag, Object object) {
+        printer.i(tag, object);
+    }
+
     /**
      * {@link PrinterManager#w(Object)}
      * Color #BBBB23
@@ -67,6 +72,10 @@ public class Logg {
      */
     public static void w(Object object) {
         printer.w(object);
+    }
+
+    public static void w(String tag, Object object) {
+        printer.w(tag, object);
     }
 
     /**
@@ -79,6 +88,10 @@ public class Logg {
         printer.e(object);
     }
 
+    public static void e(String tag, Object object) {
+        printer.e(tag, object);
+    }
+
     /**
      * {@link PrinterManager#wtf(Object)}
      * Color #8F0005
@@ -87,6 +100,10 @@ public class Logg {
      */
     public static void wtf(Object object) {
         printer.wtf(object);
+    }
+
+    public static void wtf(String tag, Object object) {
+        printer.wtf(tag, object);
     }
 
     /**
@@ -99,6 +116,10 @@ public class Logg {
         printer.json(object);
     }
 
+    public static void json(String tag, Object object) {
+        printer.json(tag, object);
+    }
+
     /**
      * XML
      * {@link PrinterManager#xml(Object)}
@@ -107,5 +128,21 @@ public class Logg {
      */
     public static void xml(Object object) {
         printer.xml(object);
+    }
+
+    public static void xml(String tag, Object object) {
+        printer.xml(tag, object);
+    }
+
+    public static void addInterceptor(LoggInterceptor interceptor) {
+        printer.addInterceptor(interceptor);
+    }
+
+    public static void removeInterceptor(LoggInterceptor interceptor) {
+
+    }
+
+    public static void clearInterceptors() {
+
     }
 }

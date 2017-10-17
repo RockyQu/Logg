@@ -1,10 +1,7 @@
 package com.logg.printer;
 
-import com.logg.printer.manager.PrinterManager;
-
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.List;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;

@@ -2,20 +2,25 @@ package com.logg.interceptor.callback;
 
 import com.logg.printer.Type;
 
-import java.util.List;
-
-/**
- *
- */
 public interface ICallback {
 
-    void addCallback(LoggCallback callback);
+    /**
+     * 添加一个全局回调
+     */
+    void addCallback(LoggStrategy callback);
 
-    void removeCallback(LoggCallback callback);
+    /**
+     * 移除一个全局回调
+     */
+    void removeCallback(LoggStrategy callback);
 
-    void clearCallback(boolean clear);
+    /**
+     * 清空全部
+     */
+    void clearCallbacks(boolean clear);
 
-    List<LoggCallback> getCallbacks();
-
+    /**
+     * 遍历全局回调集合，并回调至{@link LoggStrategy#logg(Type, String, String)}方法
+     */
     void printerAll(Type type, String tag, String object);
 }

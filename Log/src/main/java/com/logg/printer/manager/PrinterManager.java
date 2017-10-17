@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.logg.Logg;
 import com.logg.config.LoggConfig;
 import com.logg.config.LoggConstant;
+import com.logg.interceptor.LoggInterceptor;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
 import com.logg.printer.Printer;
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
 /**
  * 日志管理器
  */
-public class PrinterManager {
+public class PrinterManager implements IPrinterManager {
 
     // PrinterManager
-    private static PrinterManager printerManager = null;
+    private static IPrinterManager printerManager = null;
 
     // Default Printer
     private Printer defaultPrinter = null;
@@ -32,12 +33,14 @@ public class PrinterManager {
     private Printer xmlPrinter = null;
 
     /**
+     * LoggInterceptors
+     */
+    private final List<LoggInterceptor> interceptors = new ArrayList<>();
+
+    /**
      * Parameter configuration
      */
     private LoggConfig setting = null;
-
-    // 一个细粒度自定义前缀Tag
-    private String tag;
 
     public PrinterManager() {
         defaultPrinter = new DefaultPrinter();
@@ -47,7 +50,7 @@ public class PrinterManager {
         setting = LoggConfig.getConfig();
     }
 
-    public static synchronized PrinterManager get() {
+    public static synchronized IPrinterManager get() {
         if (printerManager == null) {
             synchronized (PrinterManager.class) {
                 if (printerManager == null) {
@@ -58,54 +61,64 @@ public class PrinterManager {
         return printerManager;
     }
 
-    /**
-     * @param tag
-     */
-    public PrinterManager tag(String tag) {
-        this.tag = tag;
-        return this;
-    }
-
-    /**
-     * @param object
-     */
+    @Override
     public void v(Object object) {
-        this.printer(Type.V, object);
+        this.v(getTag(), object);
     }
 
-    /**
-     * @param object
-     */
+    @Override
+    public void v(String tag, Object object) {
+        this.printer(Type.V, tag, object);
+    }
+
+    @Override
     public void d(Object object) {
-        this.printer(Type.D, object);
+        this.d(getTag(), object);
     }
 
-    /**
-     * @param object
-     */
+    @Override
+    public void d(String tag, Object object) {
+        this.printer(Type.D, tag, object);
+    }
+
+    @Override
     public void i(Object object) {
-        this.printer(Type.I, object);
+        this.i(getTag(), object);
     }
 
-    /**
-     * @param object
-     */
+    @Override
+    public void i(String tag, Object object) {
+        this.printer(Type.I, tag, object);
+    }
+
+    @Override
     public void w(Object object) {
-        this.printer(Type.W, object);
+        this.w(getTag(), object);
     }
 
-    /**
-     * @param object
-     */
+    @Override
+    public void w(String tag, Object object) {
+        this.printer(Type.W, tag, object);
+    }
+
+    @Override
     public void e(Object object) {
-        this.printer(Type.E, object);
+        this.e(getTag(), object);
     }
 
-    /**
-     * @param object
-     */
+    @Override
+    public void e(String tag, Object object) {
+        this.printer(Type.E, tag, object);
+    }
+
+    @Override
     public void wtf(Object object) {
-        this.printer(Type.WTF, object);
+        this.wtf(getTag(), object);
+    }
+
+    @Override
+    public void wtf(String tag, Object object) {
+        this.printer(Type.WTF, tag, object);
     }
 
     /**
@@ -113,8 +126,14 @@ public class PrinterManager {
      *
      * @param object
      */
+    @Override
     public void json(Object object) {
-        this.printer(Type.J, object);
+        this.json(getTag(), object);
+    }
+
+    @Override
+    public void json(String tag, Object object) {
+        this.printer(Type.J, tag, object);
     }
 
     /**
@@ -122,8 +141,33 @@ public class PrinterManager {
      *
      * @param object
      */
+    @Override
     public void xml(Object object) {
-        this.printer(Type.X, object);
+        this.xml(getTag(), object);
+    }
+
+    @Override
+    public void xml(String tag, Object object) {
+        this.printer(Type.X, tag, object);
+    }
+
+    @Override
+    public void addInterceptor(LoggInterceptor interceptor) {
+        if (interceptor != null) {
+            interceptors.add(interceptor);
+        }
+    }
+
+    @Override
+    public void removeInterceptor(LoggInterceptor interceptor) {
+        if (interceptor != null) {
+            interceptors.remove(interceptor);
+        }
+    }
+
+    @Override
+    public void clearInterceptors() {
+        interceptors.clear();
     }
 
     /**
@@ -132,10 +176,15 @@ public class PrinterManager {
      * @param type
      * @param object
      */
-    private synchronized void printer(Type type, Object object) {
-
+    private synchronized void printer(Type type, String tag, Object object) {
         if (setting != null && !setting.isDebug()) {
             return;
+        }
+
+        for (LoggInterceptor interceptor : interceptors) {
+            if (interceptor.isLoggable()) {
+                interceptor.proceed(type, tag, object);
+            }
         }
 
         switch (type) {
@@ -148,34 +197,23 @@ public class PrinterManager {
                 String o = ObjectUtil.objectToString(object);
                 if (o.length() > LoggConstant.LINE_MAX) {
                     for (String subMsg : bigStringToList(o)) {
-                        defaultPrinter.printer(type, getTag(), subMsg);
+                        defaultPrinter.printer(type, tag, subMsg);
                     }
                     return;
                 } else {
-                    defaultPrinter.printer(type, getTag(), o);
+                    defaultPrinter.printer(type, tag, o);
                 }
                 break;
             case J:
-                jsonPrinter.printer(type, getTag(), ObjectUtil.objectToString(object));
+                jsonPrinter.printer(type, tag, ObjectUtil.objectToString(object));
                 break;
             case X:
-                xmlPrinter.printer(type, getTag(), ObjectUtil.objectToString(object));
+                xmlPrinter.printer(type, tag, ObjectUtil.objectToString(object));
                 break;
             default:
-                defaultPrinter.printer(type, getTag(), ObjectUtil.objectToString(object));
+                defaultPrinter.printer(type, tag, ObjectUtil.objectToString(object));
                 break;
         }
-
-        this.clearCurrentTag();
-    }
-
-    /**
-     * 请空当前 Tag 信息
-     *
-     * @return
-     */
-    private void clearCurrentTag() {
-        tag = null;
     }
 
     /**
@@ -185,9 +223,7 @@ public class PrinterManager {
      */
     private String getTag() {
         if (setting != null) {
-            if (!TextUtils.isEmpty(tag)) {
-                return tag;
-            } else if (!TextUtils.isEmpty(setting.getTag())) {
+            if (!TextUtils.isEmpty(setting.getTag())) {
                 return setting.getTag();
             } else {
                 return spliceTag();
