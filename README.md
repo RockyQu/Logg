@@ -12,7 +12,7 @@
 ## Download
 Gradle:
 ```
-compile 'com.logg:Logg:1.1.0'
+compile 'com.logg:Logg:1.5.0'
 ```
 
 ## History
