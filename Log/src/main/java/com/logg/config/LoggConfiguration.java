@@ -1,5 +1,6 @@
 package com.logg.config;
 
+import com.logg.interceptor.LoggInterceptor;
 import com.logg.parser.Parser;
 
 import java.util.ArrayList;
@@ -15,54 +16,18 @@ public class LoggConfiguration {
 
     private List<Parser> parsers = new ArrayList<>();
 
+    private List<LoggInterceptor> interceptors;
+
     public LoggConfiguration(Buidler buidler) {
         this.debug = buidler.debug;
         this.tag = buidler.tag;
         this.parsers = buidler.parsers;
 
         this.addParserClass(LoggConstant.DEFAULT_PARSER_CLASS);
+
+        this.interceptors = buidler.interceptors;
     }
 
-    public static class Buidler {
-
-        /**
-         * 是否开启Debug模试
-         * 在发布正式版本,应该关闭Log日志的输出
-         */
-        private boolean debug = true;
-
-        /**
-         * 所有日志的前缀Tag
-         * 如果你设置的单个日志Tag会覆盖此变量
-         */
-        private String tag = null;
-
-        /**
-         * 如果你想处理解析一些此框架不支持的数据,可以实现{@link Parser}接口,实现自己的解析方式
-         */
-        private List<Parser> parsers = new ArrayList<>();
-
-        public Buidler() {
-            ;
-        }
-
-        public Buidler setTag(String tag) {
-            if (tag == null) {
-                throw new IllegalArgumentException("Tag can not be empty!");
-            }
-            this.tag = tag;
-            return this;
-        }
-
-        public Buidler setDebug(boolean debug) {
-            this.debug = debug;
-            return this;
-        }
-
-        public LoggConfiguration build() {
-            return new LoggConfiguration(this);
-        }
-    }
 
     public List<Parser> getParsers() {
         return parsers;
@@ -88,5 +53,60 @@ public class LoggConfiguration {
 
     public String getTag() {
         return tag;
+    }
+
+    public List<LoggInterceptor> getInterceptors() {
+        return interceptors;
+    }
+
+    public static class Buidler {
+
+        /**
+         * 是否开启Debug模试
+         * 在发布正式版本,应该关闭Log日志的输出
+         */
+        private boolean debug = true;
+
+        /**
+         * 所有日志的前缀Tag
+         * 如果你设置的单个日志Tag会覆盖此变量
+         */
+        private String tag = null;
+
+        /**
+         * 如果你想处理解析一些此框架不支持的数据,可以实现{@link Parser}接口,实现自己的解析方式
+         */
+        private List<Parser> parsers = new ArrayList<>();
+
+        /**
+         * LoggInterceptors
+         */
+        private List<LoggInterceptor> interceptors = new ArrayList<>();
+
+        public Buidler() {
+            ;
+        }
+
+        public Buidler setTag(String tag) {
+            if (tag == null) {
+                throw new IllegalArgumentException("Tag can not be empty!");
+            }
+            this.tag = tag;
+            return this;
+        }
+
+        public Buidler setDebug(boolean debug) {
+            this.debug = debug;
+            return this;
+        }
+
+        public Buidler addInterceptor(LoggInterceptor interceptor) {
+            this.interceptors.add(interceptor);
+            return this;
+        }
+
+        public LoggConfiguration build() {
+            return new LoggConfiguration(this);
+        }
     }
 }

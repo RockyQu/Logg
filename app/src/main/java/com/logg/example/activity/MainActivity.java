@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.logg.example.helper.TestInterceptor;
 import com.logg.interceptor.LoggInterceptor;
 import com.logg.interceptor.callback.GlobalCallback;
 import com.logg.interceptor.callback.LoggCallback;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         btnXMLLog.setOnClickListener(onClickListener);
         btnBigLog.setOnClickListener(onClickListener);
 
-        Logg.addInterceptor(new LoggInterceptor());
+        Logg.addInterceptor(new TestInterceptor());
 
         // 添加一个全局监听
         GlobalCallback.getInstance().addCallback(new LoggCallback() {

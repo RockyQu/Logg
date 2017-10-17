@@ -12,7 +12,7 @@ public class LoggStructure {
     // 前缀
     private String tag;
     // 内容
-    private Object object;
+    private String object;
 
     // 线程信息，如果线程信息被禁用则为Null
     private String thread;
@@ -21,11 +21,11 @@ public class LoggStructure {
 
     }
 
-    public LoggStructure(Type type, String tag, Object object) {
+    public LoggStructure(Type type, String tag, String object) {
         this(type, tag, object, null);
     }
 
-    public LoggStructure(Type type, String tag, Object object, String thread) {
+    public LoggStructure(Type type, String tag, String object, String thread) {
         this.type = type;
         this.tag = tag;
         this.object = object;
@@ -48,11 +48,11 @@ public class LoggStructure {
         this.tag = tag;
     }
 
-    public Object getObject() {
+    public String getObject() {
         return object;
     }
 
-    public void setObject(Object object) {
+    public void setObject(String object) {
         this.object = object;
     }
 

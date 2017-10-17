@@ -6,7 +6,7 @@ import com.logg.Logg;
 import com.logg.config.LoggConfiguration;
 import com.logg.config.LoggConstant;
 import com.logg.interceptor.Interceptor;
-import com.logg.interceptor.LoggStructure;
+import com.logg.interceptor.LoggInterceptor;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
 import com.logg.printer.Printer;
@@ -14,8 +14,6 @@ import com.logg.printer.Type;
 import com.logg.printer.XmlPrinter;
 import com.logg.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -24,16 +22,11 @@ import java.util.logging.Logger;
 public class PrinterManager implements IPrinterManager {
 
     // Default Printer
-    private Printer defaultPrinter = null;
+    private DefaultPrinter defaultPrinter = null;
     // Json Printer
     private Printer jsonPrinter = null;
     // XML Printer
     private Printer xmlPrinter = null;
-
-    /**
-     * LoggInterceptors
-     */
-    private final List<Interceptor> interceptors = new ArrayList<>();
 
     /**
      * Parameter configuration
@@ -165,22 +158,18 @@ public class PrinterManager implements IPrinterManager {
     }
 
     @Override
-    public void addInterceptor(Interceptor interceptor) {
-        if (interceptor != null) {
-            interceptors.add(interceptor);
-        }
+    public void addInterceptor(LoggInterceptor interceptor) {
+        defaultPrinter.addInterceptor(interceptor);
     }
 
     @Override
-    public void removeInterceptor(Interceptor interceptor) {
-        if (interceptor != null) {
-            interceptors.remove(interceptor);
-        }
+    public void removeInterceptor(LoggInterceptor interceptor) {
+        defaultPrinter.removeInterceptor(interceptor);
     }
 
     @Override
     public void clearInterceptors() {
-        interceptors.clear();
+        defaultPrinter.clearInterceptors();
     }
 
     /**
@@ -192,24 +181,6 @@ public class PrinterManager implements IPrinterManager {
     private synchronized void printer(Type type, String tag, Object object) {
         if (configuration != null && !configuration.isDebug()) {
             return;
-        }
-
-        LoggStructure item = new LoggStructure(type, tag, object, null);
-        for (Interceptor interceptor : interceptors) {
-            if (interceptor.isLoggable(type)) {
-                item = interceptor.intercept(item);
-                if (item == null) {
-                    throw new NullPointerException("LoggCallback == null");
-                }
-
-                if (item.getTag() == null) {
-                    throw new NullPointerException("Tag == null, You can modify Tag, but can not empty Tag.");
-                }
-
-                if (item.getObject() == null) {
-                    throw new NullPointerException("Object == null, You can modify the log information, but you can not clear the log information.");
-                }
-            }
         }
 
         switch (type) {

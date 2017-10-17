@@ -3,7 +3,13 @@ package com.logg.printer;
 import android.util.Log;
 
 import com.logg.config.LoggConfiguration;
+import com.logg.interceptor.Interceptor;
+import com.logg.interceptor.LoggInterceptor;
+import com.logg.interceptor.LoggStructure;
 import com.logg.interceptor.callback.GlobalCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Default Printer
@@ -12,41 +18,83 @@ public class DefaultPrinter implements Printer {
 
     private LoggConfiguration configuration;
 
+    /**
+     * LoggInterceptors
+     */
+    private List<LoggInterceptor> interceptors;
+
     public DefaultPrinter(LoggConfiguration configuration) {
         this.configuration = configuration;
+        interceptors = configuration.getInterceptors();
     }
 
     @Override
     public void printer(Type type, String tag, String object) {
-        switch (type) {
+        LoggStructure item = new LoggStructure(type, tag, object, null);
+        if (interceptors != null) {
+            for (Interceptor interceptor : interceptors) {
+                if (interceptor.isLoggable(type)) {
+                    item = interceptor.intercept(item);
+                    if (item == null) {
+                        throw new NullPointerException("LoggCallback == null");
+                    }
+
+                    if (item.getTag() == null) {
+                        throw new NullPointerException("Tag == null, You can modify Tag, but can not empty Tag.");
+                    }
+
+                    if (item.getObject() == null) {
+                        throw new NullPointerException("Object == null, You can modify the log information, but you can not clear the log information.");
+                    }
+                }
+            }
+        }
+
+        switch (item.getType()) {
             case V:
-                Log.v(tag, object);
+                Log.v(item.getTag(), item.getObject());
                 break;
             case D:
-                Log.d(tag, object);
+                Log.d(item.getTag(), item.getObject());
                 break;
             case I:
-                Log.i(tag, object);
+                Log.i(item.getTag(), item.getObject());
                 break;
             case W:
-                Log.w(tag, object);
+                Log.w(item.getTag(), item.getObject());
                 break;
             case E:
-                Log.e(tag, object);
+                Log.e(item.getTag(), item.getObject());
                 break;
             case WTF:
-                Log.wtf(tag, object);
+                Log.wtf(item.getTag(), item.getObject());
                 break;
             case J:
-                Log.d(tag, object);
+                Log.d(item.getTag(), item.getObject());
                 break;
             case X:
-                Log.d(tag, object);
+                Log.d(item.getTag(), item.getObject());
                 break;
             default:
                 break;
         }
 
-        GlobalCallback.getInstance().printerAll(type, tag, object);
+        GlobalCallback.getInstance().printerAll(item.getType(), item.getTag(), item.getObject());
+    }
+
+    public void addInterceptor(LoggInterceptor interceptor) {
+        if (interceptor != null) {
+            interceptors.add(interceptor);
+        }
+    }
+
+    public void removeInterceptor(LoggInterceptor interceptor) {
+        if (interceptor != null) {
+            interceptors.remove(interceptor);
+        }
+    }
+
+    public void clearInterceptors() {
+        interceptors.clear();
     }
 }

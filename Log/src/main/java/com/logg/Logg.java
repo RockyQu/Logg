@@ -2,6 +2,7 @@ package com.logg;
 
 import com.logg.config.LoggConfiguration;
 import com.logg.interceptor.Interceptor;
+import com.logg.interceptor.LoggInterceptor;
 import com.logg.printer.manager.IPrinterManager;
 import com.logg.printer.manager.PrinterManager;
 
@@ -143,11 +144,11 @@ public class Logg {
         printer.xml(tag, object);
     }
 
-    public static void addInterceptor(Interceptor interceptor) {
+    public static void addInterceptor(LoggInterceptor interceptor) {
         printer.addInterceptor(interceptor);
     }
 
-    public static void removeInterceptor(Interceptor interceptor) {
+    public static void removeInterceptor(LoggInterceptor interceptor) {
         printer.removeInterceptor(interceptor);
     }
 
