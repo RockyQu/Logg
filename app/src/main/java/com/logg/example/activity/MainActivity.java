@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         btnXMLLog.setOnClickListener(onClickListener);
         btnBigLog.setOnClickListener(onClickListener);
 
+        // 添加一个拦截器
         Logg.addInterceptor(new TestInterceptor());
 
         // 添加一个全局监听
