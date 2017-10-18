@@ -27,7 +27,7 @@ public class LoggInterceptor implements Interceptor {
      */
     @Override
     public LoggStructure intercept(LoggStructure structure) {
-        // 如果不做任务处理返回 structure
+        // 如果不做任何处理返回 structure
         return structure;
     }
 }
