@@ -27,6 +27,10 @@ compile 'com.logg:Logg:1.5.0'
 [LogUtils](https://github.com/pengwei1024/LogUtils)  
 [DarksLogs](https://github.com/liulhdarks/darks-logs)
 
+## About Me
+* Home [https://designqu.github.io](https://designqu.github.io)  
+* GitHub [https://github.com/DesignQu](https://github.com/DesignQu)  
+
 ## License
 ```
 Copyright 2016-2017 DesignQu
