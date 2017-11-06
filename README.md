@@ -28,7 +28,7 @@ compile 'com.logg:Logg:1.5.0'
 [DarksLogs](https://github.com/liulhdarks/darks-logs)
 
 ## About Me
-* Email [china.rocky.coder@gmail.com](china.rocky.coder@gmail.com)  
+* Email [china.rocky.coder@gmail.com](china.rocky.coder@gmail.com)  
 * Home [https://designqu.github.io](https://designqu.github.io)  
 * GitHub [https://github.com/DesignQu](https://github.com/DesignQu)  
 
