@@ -1,7 +1,7 @@
 # Logg
 这是一个Android 轻量级简单易用的Log组件
 
-[![Github file size]Github file size)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
+[![Sourcegraph for Repo Reference Count](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 
 ## Features  
 * 支持输出基本数据类型、数组、Map、List、Intent、Bundle，支持Json、XML格式化输出  
