@@ -1,6 +1,7 @@
 # Logg
 这是一个Android 轻量级简单易用的Log组件
 
+[![](https://img.shields.io/badge/GitHub%20Pages-HOME-red.svg)](https://designqu.github.io/)
 [![](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://github.com/DesignQu/Logg/blob/master/Log/build.gradle)
 
