@@ -1,7 +1,7 @@
 # Logg
 这是一个Android 轻量级简单易用的Log组件
 
-[![Github file size](https://img.shields.io/github/size/webcaetano/craft/build/phaser-craft.min.js.svg)](https://github.com/DesignQu/Logg)
+[![Github file size]Github file size)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 
 ## Features  
 * 支持输出基本数据类型、数组、Map、List、Intent、Bundle，支持Json、XML格式化输出  
