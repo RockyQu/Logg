@@ -5,6 +5,9 @@
 [![](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://github.com/DesignQu/Logg/blob/master/Log/build.gradle)
 
+[![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
+
+
 ## Features  
 * 支持输出基本数据类型、数组、Map、List、Intent、Bundle，支持Json、XML格式化输出  
 * 不依赖任何第三方框架，纯原生编写  
