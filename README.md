@@ -2,6 +2,7 @@
 这是一个Android 轻量级简单易用的Log组件
 
 [![](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
+[![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://github.com/DesignQu/Logg/blob/master/Log/build.gradle)
 
 ## Features  
 * 支持输出基本数据类型、数组、Map、List、Intent、Bundle，支持Json、XML格式化输出  
