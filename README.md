@@ -2,17 +2,19 @@
 这是一个Android 轻量级简单易用的Log组件
 
 [![](https://img.shields.io/badge/GitHub%20Pages-HOME-red.svg)](https://designqu.github.io/)
+[![Build Status](https://travis-ci.org/DesignQu/Logg.svg?branch=master)](https://travis-ci.org/DesignQu/Logg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11369b4297bc49e18e8f5d30d7ad552c)](https://www.codacy.com/app/DesignQu/Logg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DesignQu/Logg&amp;utm_campaign=Badge_Grade)
-[![](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
+[![](https://img.shields.io/badge/License-Apache%202.0%20-orange.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
 [![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
 
 ## Features  
-* 支持输出基本数据类型、数组、Map、List、Intent、Bundle，支持Json、XML格式化输出  
+* 支持所有基本数据类型、数组、Map、List、Bundle、Intent、Reference、Throwable、Map、Collection  
+* 支持Json、XML格式化  
 * 不依赖任何第三方框架，纯原生编写  
 * 自定义解析器，当输入类型无法满足需求时或无法解析时，可实现Parser接口重写方法来添加自定义解析器  
 * 支持添加拦截器，添加拦截器后它会在最终打印输出前进行拦截处理，可以对日志信息进行重构处理  
-* 支持添加全局回调，在不影响底层输出的情况下，所有信息会回调至全局接口里，可以在这里保存你需要的信息到文件中
+* 支持添加全局回调，在不影响底层输出的情况下，所有信息会回调至全局接口里，可以在这里按各种级别类型保存你需要的信息到文件中
 
 ## Screenshots
 ![screenshots1](https://github.com/DesignQu/Tool-Log/blob/master/ImageFolder/screenshots1.png "screenshots1")
@@ -20,7 +22,7 @@
 ## Download
 Gradle:
 ```
-compile 'com.logg:Logg:1.5.0'
+compile 'com.logg:Logg:1.5.1'
 ```
 
 ## History
