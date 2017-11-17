@@ -6,7 +6,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11369b4297bc49e18e8f5d30d7ad552c)](https://www.codacy.com/app/DesignQu/Logg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DesignQu/Logg&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/badge/License-Apache%202.0%20-blue.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
-[![](https://img.shields.io/github/release/DesignQu/Logg-brightgreen.svg)](https://github.com/DesignQu/Logg/releases)
+[![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
 
 ## Features  
 * 支持所有基本数据类型、数组、Map、List、Bundle、Intent、Reference、Throwable、Map、Collection  
