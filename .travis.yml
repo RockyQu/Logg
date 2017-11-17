@@ -14,4 +14,11 @@ android:
     - android-25
     - extra
 
+before_install:
+     - chmod +x gradlew
+     
+after_script:
+    - cat ./demo/build/outputs/lint-results.xml
+    - cat ./library/build/outputs/lint-results.xml
+
 sudo: false
