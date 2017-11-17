@@ -48,7 +48,7 @@ public class GlobalCallback implements ICallback {
     @Override
     public void addCallback(LoggCallback callback) {
         if (callback == null) {
-            throw new NullPointerException("LoggCallback == null");
+            throw new NullPointerException();
         }
 
         callbacks.add(callback);

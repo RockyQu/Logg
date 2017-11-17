@@ -24,7 +24,6 @@ import com.logg.interceptor.LoggInterceptor;
 import com.logg.interceptor.LoggStructure;
 import com.logg.interceptor.callback.GlobalCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,15 +31,12 @@ import java.util.List;
  */
 public class DefaultPrinter implements Printer {
 
-    private LoggConfiguration configuration;
-
     /**
      * LoggInterceptors
      */
     private List<LoggInterceptor> interceptors;
 
     public DefaultPrinter(LoggConfiguration configuration) {
-        this.configuration = configuration;
         interceptors = configuration.getInterceptors();
     }
 
@@ -52,15 +48,15 @@ public class DefaultPrinter implements Printer {
                 if (interceptor.isLoggable(type)) {
                     item = interceptor.intercept(item);
                     if (item == null) {
-                        throw new NullPointerException("LoggCallback == null");
+                        throw new NullPointerException();
                     }
 
                     if (item.getTag() == null) {
-                        throw new NullPointerException("Tag == null, You can modify Tag, but can not empty Tag.");
+                        throw new NullPointerException();
                     }
 
                     if (item.getObject() == null) {
-                        throw new NullPointerException("Object == null, You can modify the log information, but you can not clear the log information.");
+                        throw new NullPointerException();
                     }
                 }
             }

@@ -17,9 +17,6 @@
 package com.logg.interceptor.callback;
 
 import com.logg.printer.Type;
-import com.logg.printer.manager.PrinterManager;
-
-import java.util.List;
 
 /**
  * 提供全局回调接口，如果你设置了此接口，在不影响底层输出的情况下，所有的Log都会回调到这个接口里

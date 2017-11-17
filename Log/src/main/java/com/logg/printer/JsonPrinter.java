@@ -27,14 +27,14 @@ import org.json.JSONObject;
  */
 public class JsonPrinter extends DefaultPrinter {
 
-    public JsonPrinter(LoggConfiguration configuration) {
-        super(configuration);
-    }
-
     /**
      * 缩进量
      */
     private static final int JSON_INDENT = 4;
+
+    public JsonPrinter(LoggConfiguration configuration) {
+        super(configuration);
+    }
 
     @Override
     public void printer(Type type, String tag, String object) {

@@ -17,7 +17,6 @@
 package com.logg;
 
 import com.logg.config.LoggConfiguration;
-import com.logg.interceptor.Interceptor;
 import com.logg.interceptor.LoggInterceptor;
 import com.logg.printer.manager.IPrinterManager;
 import com.logg.printer.manager.PrinterManager;

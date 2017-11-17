@@ -116,8 +116,7 @@ public class Utils {
      * @param isSubClass  是否为子class
      * @param childOffset 递归解析属性的层级
      */
-    private static void iterateClassFields(Class cla, StringBuilder builder, Object o, boolean isSubClass,
-                                           int childOffset) {
+    private static void iterateClassFields(Class cla, StringBuilder builder, Object o, boolean isSubClass, int childOffset) {
         if (cla.equals(Object.class)) {
             return;
         }

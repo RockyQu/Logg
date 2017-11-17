@@ -45,7 +45,7 @@ public class LoggStructure {
         this.type = type;
         this.tag = tag;
         this.object = object;
-        this.type = type;
+        this.thread = thread;
     }
 
     public Type getType() {

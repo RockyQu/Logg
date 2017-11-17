@@ -21,7 +21,6 @@ import android.text.TextUtils;
 import com.logg.Logg;
 import com.logg.config.LoggConfiguration;
 import com.logg.config.LoggConstant;
-import com.logg.interceptor.Interceptor;
 import com.logg.interceptor.LoggInterceptor;
 import com.logg.printer.DefaultPrinter;
 import com.logg.printer.JsonPrinter;
