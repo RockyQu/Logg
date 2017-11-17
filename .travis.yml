@@ -14,8 +14,4 @@ android:
     - android-25
     - extra
 
-after_script:
-    - cat ./demo/build/outputs/lint-results.xml
-    - cat ./library/build/outputs/lint-results.xml
-
 sudo: false
