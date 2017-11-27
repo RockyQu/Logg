@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_default_log:
                         // 基本数据类型 byte short int long float double char boolean
                         Logg.v(3.1415926);
+                        String[] str = {"aaaaaaaa","bbbbb"};
+                        Logg.v(str);
                         Logg.v("test", 3.1415926);
                         // 数组
                         Logg.d(DataHelper.getArray());
