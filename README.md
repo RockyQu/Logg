@@ -8,6 +8,8 @@ This is a lightweight Android log component.
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
 [![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
 
+[中文介绍](https://github.com/DesignQu/Logg/wiki)   
+
 ## Features  
 * Support for all basic data types, arrays、Map、List、Bundle、Intent、Reference、Throwable、Collection  
 * Support Json, XML formatting  
