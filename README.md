@@ -12,12 +12,12 @@ This is a lightweight Android log component.
 [中文介绍](https://github.com/DesignQu/Logg/wiki)   
 
 ## Features  
-* Support for all basic data types, arrays、Map、List、Bundle、Intent、Reference、Throwable、Collection  
-* Support Json, XML formatting  
-* Not dependent on any third-party framework, pure native  
-* Custom parsers that implement the Parser interface override method to add custom parsers when the input type does not meet requirements or can not be parsed   
-* Support for adding interceptors, add interceptors it will be in the final printout before interception, log information can be reconstructed  
-* Support for adding a global callback, without affecting the underlying output, all messages will be callback to the global interface, where you can save the information you need to various levels of type
+- [x] Support for all basic data types, arrays、Map、List、Bundle、Intent、Reference、Throwable、Collection  
+- [x] Support Json, XML formatting  
+- [x] Not dependent on any third-party framework, pure native  
+- [x] Custom parsers that implement the Parser interface override method to add custom parsers when the input type does not meet requirements or can not be parsed   
+- [x] Support for adding interceptors, add interceptors it will be in the final printout before interception, log information can be reconstructed  
+- [x] Support for adding a global callback, without affecting the underlying output, all messages will be callback to the global interface, where you can save the information you need to various levels of type
 
 ## Screenshots
 ![screenshots1](https://github.com/DesignQu/Tool-Log/blob/master/ImageFolder/screenshots1.png "screenshots1")
