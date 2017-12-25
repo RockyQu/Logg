@@ -9,7 +9,7 @@ This is a lightweight Android log component.
 [![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
 <a href="http://www.methodscount.com/?lib=com.logg%3ALogg%3A1.5.1"><img src="https://img.shields.io/badge/Methods and size-296 | 29 KB-e91e63.svg"/></a>
 
-[中文介绍](https://github.com/DesignQu/Logg/wiki)   
+[中文介绍](https://github.com/RockyQu/Logg/wiki)   
 
 ## Features  
 - [x] Support for all basic data types, arrays、Map、List、Bundle、Intent、Reference、Throwable、Collection  
@@ -20,7 +20,7 @@ This is a lightweight Android log component.
 - [x] Support for adding a global callback, without affecting the underlying output, all messages will be callback to the global interface, where you can save the information you need to various levels of type
 
 ## Screenshots
-![screenshots1](https://github.com/DesignQu/Tool-Log/blob/master/ImageFolder/screenshots1.png "screenshots1")
+![screenshots](https://github.com/DesignQu/Logg/blob/master/ImageFolder/screenshots.png "screenshots")
 
 ## Download
 Gradle:
@@ -29,10 +29,10 @@ compile 'com.logg:Logg:1.5.1'
 ```
 
 ## History
-[UpdateLog](https://github.com/DesignQu/Logg/releases)   
+[UpdateLog](https://github.com/RockyQu/Logg/releases)   
 
 ## Feedback
-* Project  [Submit Bug or Idea](https://github.com/DesignQu/Logg/issues)   
+* Project  [Submit Bug or Idea](https://github.com/RockyQu/Logg/issues)   
 
 ## Thanks
 [LogUtils](https://github.com/pengwei1024/LogUtils)  
@@ -40,8 +40,8 @@ compile 'com.logg:Logg:1.5.1'
 
 ## About Me
 * Email [china.rocky.coder@gmail.com](china.rocky.coder@gmail.com)  
-* Home [https://designqu.github.io](https://designqu.github.io)  
-* GitHub [https://github.com/DesignQu](https://github.com/DesignQu)  
+* Home [https://designqu.github.io](https://rockyqu.github.io)  
+* GitHub [https://github.com/DesignQu](https://github.com/RockyQu)  
 
 ## License
 ```
