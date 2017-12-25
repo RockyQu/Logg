@@ -12,7 +12,7 @@ publish {
     artifactId = 'Logg'// 项目名
     publishVersion = libraryVersionName// 版本号
     desc = 'Android Log'
-    website = 'https://github.com/DesignQu/'
+    website = 'https://github.com/RockyQu/'
 }
 // End 以上这段功能是用来上传至代码库
 

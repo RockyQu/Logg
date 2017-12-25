@@ -108,10 +108,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_github:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/RockyQu")));
                 break;
             case R.id.action_Logg:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/DesignQu/Logg.git")));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/RockyQu/Logg.git")));
                 break;
         }
 
