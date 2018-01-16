@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 // Start 以下这段功能是用来上传至代码库，其他项目不用复制这段代码
 apply plugin: 'com.novoda.bintray-release'
 
-def libraryVersionCode = 9
-def libraryVersionName = '1.5.1'
+def libraryVersionCode = 10
+def libraryVersionName = '1.5.2'
 
 publish {
     userOrg = 'chinarocky'// 这是代码仓库的账号
