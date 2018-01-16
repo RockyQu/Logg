@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.logg.example.helper.TestInterceptor;
-import com.logg.interceptor.LoggInterceptor;
 import com.logg.interceptor.callback.GlobalCallback;
 import com.logg.interceptor.callback.LoggCallback;
 import com.logg.printer.Type;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.logTest();
+
     }
 
     private void logTest() {
@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
                         Logg.e(DataHelper.getIntent());
                         break;
                     case R.id.btn_json_log:
+
+                        Logg.json(DataHelper.getJsonArray());
                         Logg.json(DataHelper.getJson());
+
                         break;
                     case R.id.btn_xml_log:
                         Logg.xml(DataHelper.getXml());

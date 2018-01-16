@@ -7,6 +7,10 @@ import com.logg.example.model.Child;
 import com.logg.example.model.Man;
 import com.logg.example.model.People;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -14,9 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- */
 public final class DataHelper {
 
     /**
@@ -85,7 +86,70 @@ public final class DataHelper {
      * @return
      */
     public static String getJson() {
-        return "{'flag':true,'user':{'id':32767,'name':{'id':32768}}}";
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("a","b");
+            jsonObject.put("aasasf","bag");
+            jsonObject.put("aadg","badga");
+            jsonObject.put("adg",true);
+
+            JSONArray jsonArray = new JSONArray();
+            JSONObject jsonObject1 = new JSONObject();
+            jsonObject1.put("a","b");
+            jsonArray.put(jsonObject1);
+
+            jsonObject1 = new JSONObject();
+            jsonObject1.put("c","asfadged");
+            jsonArray.put(jsonObject1);
+
+            jsonObject1 = new JSONObject();
+            jsonObject1.put("a",1);
+            jsonArray.put(jsonObject1);
+
+            jsonObject1 = new JSONObject();
+            jsonObject1.put("r",3.141586521156);
+            jsonArray.put(jsonObject1);
+
+            jsonObject.put("array",jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject.toString();
+    }
+
+    /**
+     * JsonArray测试
+     *
+     * @return
+     */
+    public static String getJsonArray() {
+        JSONArray jsonArray = new JSONArray();
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("a","b");
+            jsonArray.put(jsonObject);
+
+            jsonObject = new JSONObject();
+            jsonObject.put("c","asfadged");
+            jsonArray.put(jsonObject);
+
+            jsonObject = new JSONObject();
+            jsonObject.put("a",1);
+            jsonArray.put(jsonObject);
+
+            jsonObject = new JSONObject();
+            jsonObject.put("r",3.141586521156);
+            jsonArray.put(jsonObject);
+
+            jsonObject = new JSONObject();
+            jsonObject.put("w",true);
+            jsonArray.put(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonArray.toString();
     }
 
     /**

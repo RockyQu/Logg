@@ -43,7 +43,7 @@ public class JsonPrinter extends DefaultPrinter {
             if (object.startsWith("{")) {
                 JSONObject jsonObject = new JSONObject(object);
                 json = jsonObject.toString(JSON_INDENT);
-            } else if (object.startsWith("{")) {
+            } else if (object.startsWith("[")) {
                 JSONArray jsonArray = new JSONArray(object);
                 json = jsonArray.toString(JSON_INDENT);
             } else {
