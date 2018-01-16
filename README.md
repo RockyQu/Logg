@@ -2,7 +2,7 @@
 This is a lightweight Android log component. 
 
 [![](https://img.shields.io/badge/GitHub%20Pages-HOME-red.svg)](https://designqu.github.io/)
-[![Build Status](https://travis-ci.org/DesignQu/Logg.svg?branch=master)](https://travis-ci.org/DesignQu/Logg)
+[![Build Status](https://travis-ci.org/RockyQu/Logg.svg?branch=master)](https://travis-ci.org/RockyQu/Logg)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11369b4297bc49e18e8f5d30d7ad552c)](https://www.codacy.com/app/DesignQu/Logg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DesignQu/Logg&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/badge/License-Apache%202.0%20-orange.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
