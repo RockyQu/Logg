@@ -40,8 +40,8 @@ compile 'com.logg:Logg:1.5.2'
 
 ## About Me
 * Email [china.rocky.coder@gmail.com](china.rocky.coder@gmail.com)  
-* Home [https://designqu.github.io](https://rockyqu.github.io)  
-* GitHub [https://github.com/DesignQu](https://github.com/RockyQu)  
+* Home [http://rockycoder.cn](http://rockycoder.cn)  
+* GitHub [https://github.com/RockyQu](https://github.com/RockyQu)  
 
 ## License
 ```
