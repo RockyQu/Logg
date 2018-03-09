@@ -39,7 +39,7 @@ compile 'com.logg:Logg:1.5.2'
 [DarksLogs](https://github.com/liulhdarks/darks-logs)
 
 ## About Me
-* Email [china.rocky.coder@gmail.com](china.rocky.coder@gmail.com)  
+* Email [250533855@qq.com](250533855@qq.com)  
 * Home [http://rockycoder.cn](http://rockycoder.cn)  
 * GitHub [https://github.com/RockyQu](https://github.com/RockyQu)  
 
