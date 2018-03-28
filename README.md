@@ -6,7 +6,7 @@ This is a lightweight Android log component.
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/11369b4297bc49e18e8f5d30d7ad552c)](https://www.codacy.com/app/DesignQu/Logg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DesignQu/Logg&amp;utm_campaign=Badge_Grade)
 [![](https://img.shields.io/badge/License-Apache%202.0%20-orange.svg)](https://github.com/DesignQu/Logg/blob/master/LICENSE.md)
 [![](https://img.shields.io/badge/API-14%2B-brightgreen.svg)](https://android-arsenal.com/api?level=14)
-[![](https://img.shields.io/github/release/DesignQu/Logg.svg)](https://github.com/DesignQu/Logg/releases)
+[![](https://img.shields.io/github/release/RockyQu/Logg.svg)](https://github.com/RockyQu/Logg/releases) 
 <a href="http://www.methodscount.com/?lib=com.logg%3ALogg%3A1.5.1"><img src="https://img.shields.io/badge/Methods and size-296 | 29 KB-e91e63.svg"/></a>
 
 [中文介绍](https://github.com/RockyQu/Logg/wiki)   
