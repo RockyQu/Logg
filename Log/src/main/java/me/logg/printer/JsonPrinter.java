@@ -17,6 +17,7 @@
 package me.logg.printer;
 
 import me.logg.config.LoggConfiguration;
+import me.logg.config.LoggConstant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,21 +39,23 @@ public class JsonPrinter extends DefaultPrinter {
 
     @Override
     public void printer(Type type, String tag, String object) {
-        String json;
+        StringBuilder json = new StringBuilder();
+        json.append(LoggConstant.SPACE).append(LoggConstant.BR);
+
         try {
             if (object.startsWith("{")) {
                 JSONObject jsonObject = new JSONObject(object);
-                json = jsonObject.toString(JSON_INDENT);
+                json.append(jsonObject.toString(JSON_INDENT));
             } else if (object.startsWith("[")) {
                 JSONArray jsonArray = new JSONArray(object);
-                json = jsonArray.toString(JSON_INDENT);
+                json.append(jsonArray.toString(JSON_INDENT));
             } else {
-                json = object;
+                json.append(object);
             }
         } catch (JSONException e) {
-            json = object;
+            json.append(object);
         }
 
-        super.printer(type, tag, json);
+        super.printer(type, tag, json.toString());
     }
 }
