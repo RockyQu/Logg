@@ -25,7 +25,7 @@ This is a lightweight Android log component.
 ## Download
 Gradle:
 ```
-compile 'com.logg:Logg:1.5.2'
+compile 'me.tool:Logg:1.6.0'
 ```
 
 ## History
