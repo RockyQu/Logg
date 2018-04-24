@@ -14,6 +14,9 @@ This is a lightweight Android log component.
 ## Features  
 - [x] Support for all basic data types, arrays、Map、List、Bundle、Intent、Reference、Throwable、Collection  
 - [x] Support Json, XML formatting  
+- [x] Supports global tags  
+- [x] Logcat display issues with Android Studio 3.1.0
+- [x] Support Debug, Release mode
 - [x] Not dependent on any third-party framework, pure native  
 - [x] Custom parsers that implement the Parser interface override method to add custom parsers when the input type does not meet requirements or can not be parsed   
 - [x] Support for adding interceptors, add interceptors it will be in the final printout before interception, log information can be reconstructed  
@@ -25,7 +28,7 @@ This is a lightweight Android log component.
 ## Download
 Gradle:
 ```
-compile 'com.logg:Logg:1.5.2'
+compile 'me.tool:Logg:1.6.0'
 ```
 
 ## History
