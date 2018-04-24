@@ -4,20 +4,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.logg.example.helper.TestInterceptor;
-import com.logg.interceptor.callback.GlobalCallback;
-import com.logg.interceptor.callback.LoggCallback;
-import com.logg.printer.Type;
 import com.tool.log.example.R;
 
-import com.logg.Logg;
+import me.logg.Logg;
 import com.logg.example.helper.DataHelper;
 
 /**
@@ -53,9 +48,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_default_log:
                         // 基本数据类型 byte short int long float double char boolean
                         Logg.v(3.1415926);
-                        String[] str = {"aaaaaaaa","bbbbb"};
+                        String[] str = {"Java","Android","IOS"};
                         Logg.v(str);
-                        Logg.v("test", 3.1415926);
+                        String[][] str1 = {{"Java","Android","IOS"},{"Java","Android","IOS"}};
+                        Logg.v(str1);
                         // 数组
                         Logg.d(DataHelper.getArray());
                         // Map
@@ -89,16 +85,16 @@ public class MainActivity extends AppCompatActivity {
         btnBigLog.setOnClickListener(onClickListener);
 
         // 添加一个拦截器
-        Logg.addInterceptor(new TestInterceptor());
+//        Logg.addInterceptor(new TestInterceptor());
 
         // 添加一个全局监听
-        GlobalCallback.getInstance().addCallback(new LoggCallback() {
-
-            @Override
-            public void logg(Type type, String tag, String message) {
-                Log.e(tag, message);
-            }
-        });
+//        GlobalCallback.getInstance().addCallback(new LoggCallback() {
+//
+//            @Override
+//            public void logg(Type type, String tag, String message) {
+//                Log.e(tag, message);
+//            }
+//        });
     }
 
     @Override

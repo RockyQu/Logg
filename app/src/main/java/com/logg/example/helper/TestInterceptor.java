@@ -2,9 +2,9 @@ package com.logg.example.helper;
 
 import android.util.Log;
 
-import com.logg.interceptor.LoggInterceptor;
-import com.logg.interceptor.LoggStructure;
-import com.logg.printer.Type;
+import me.logg.interceptor.LoggInterceptor;
+import me.logg.interceptor.LoggStructure;
+import me.logg.printer.Type;
 
 public class TestInterceptor extends LoggInterceptor {
 

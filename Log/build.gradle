@@ -4,11 +4,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 def libraryVersionCode = 10
-def libraryVersionName = '1.5.2'
+def libraryVersionName = '1.6.0'
 
 publish {
     userOrg = 'chinarocky'// 这是代码仓库的账号
-    groupId = 'com.logg'// 包名
+    groupId = 'me.tool'// 包名
     artifactId = 'Logg'// 项目名
     publishVersion = libraryVersionName// 版本号
     desc = 'Android Log'

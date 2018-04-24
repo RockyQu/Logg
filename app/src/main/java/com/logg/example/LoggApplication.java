@@ -2,8 +2,8 @@ package com.logg.example;
 
 import android.app.Application;
 
-import com.logg.Logg;
-import com.logg.config.LoggConfiguration;
+import me.logg.Logg;
+import me.logg.config.LoggConfiguration;
 
 public class LoggApplication extends Application {
 
