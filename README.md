@@ -39,7 +39,6 @@ compile 'me.tool:Logg:1.6.0'
 
 ## Thanks
 [LogUtils](https://github.com/pengwei1024/LogUtils)  
-[DarksLogs](https://github.com/liulhdarks/darks-logs)
 
 ## About Me
 * Email [250533855@qq.com](250533855@qq.com)  
