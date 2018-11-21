@@ -23,7 +23,7 @@ This is a lightweight Android log component.
 - [x] Support for adding a global callback, without affecting the underlying output, all messages will be callback to the global interface, where you can save the information you need to various levels of type
 
 ## Screenshots
-![screenshots](https://github.com/DesignQu/Logg/blob/master/ImageFolder/screenshots.png "screenshots")
+![screenshots](https://github.com/RockyQu/Logg/blob/master/ImageFolder/screenshots.png "screenshots")
 
 ## Download
 Gradle:
