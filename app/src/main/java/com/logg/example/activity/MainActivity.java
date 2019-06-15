@@ -35,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logTest() {
-        btnDefaultLog = (Button) findViewById(R.id.btn_default_log);
-        btnJsonLog = (Button) findViewById(R.id.btn_json_log);
-        btnXMLLog = (Button) findViewById(R.id.btn_xml_log);
-        btnBigLog = (Button) findViewById(R.id.btn_big_log);
+        btnDefaultLog = findViewById(R.id.btn_default_log);
+        btnJsonLog = findViewById(R.id.btn_json_log);
+        btnXMLLog = findViewById(R.id.btn_xml_log);
+        btnBigLog = findViewById(R.id.btn_big_log);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
 
@@ -62,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
                         Logg.e(DataHelper.getIntent());
                         break;
                     case R.id.btn_json_log:
-
                         Logg.json(DataHelper.getJsonArray());
                         Logg.json(DataHelper.getJson());
-
                         break;
                     case R.id.btn_xml_log:
                         Logg.xml(DataHelper.getXml());

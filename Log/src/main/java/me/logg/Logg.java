@@ -29,7 +29,7 @@ public class Logg {
     /**
      * 日志打印管理器
      */
-    private static IPrinterManager printer = null;
+    private static IPrinterManager printer;
 
     static {
         printer = PrinterManager.getInstance();
